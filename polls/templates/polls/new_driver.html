@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>New driver</title>
+</head>
+<body>
+<!-- Page header-->
+<div class="page-header">
+    {% include 'blocks/nav.html' %}
+    <h1 align="center">CAT10e</h1>
+</div>
+
+<div>
+    <p align="center" font-size="50px">Welcome! <br>
+        This page has not yet been implemented...
+        Sorry, meanwhile I am sure you would love to watch some FS videos!</p>
+
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <!-- it renders the form with the names too '{ form.as_ul }'-->
+    {{ form.as_ul }}
+
+    <button type="submit">Submit</button>
+</form>
+
+<!--
+<div class="container">
+    <h2>Register new driver</h2>
+    <br>
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputName">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputSurname">Surname</label>
+                <input type="text" class="form-control" id="surname" placeholder="Surname">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="etseibmotorsport@upc.edu">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputBirthday">Birthday</label>
+                <input type="date" class="form-control" id="birthday" placeholder="DD-MM-YYYY">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputHeight">Height</label>
+                <input type="text" class="form-control" id="height" placeholder="170cm">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputWeight">Weight</label>
+                <input type="text" class="form-control" id="weight" placeholder="70.0kg">
+            </div>
+            <div class="form-group col-md-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                           value="option1"
+                           checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        Male
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                           value="option2">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Female
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <br><br>
+
+        <button type="submit" class="btn btn-primary align-left">Submit</button>
+    </form>
+</div>
+-->
+
+</body>
+</html>
