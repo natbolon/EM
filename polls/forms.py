@@ -3,20 +3,30 @@ from .models import Driver
 
 
 class DriverForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control col-md-6', 'placeholder': "Name"
-               }
-    ))
-    surname = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control col-md-6', 'placeholder': "Surname"}
-    ))
-    # email = forms.EmailField(widget=forms.EmailField())
-    # birthday = forms.DateField(widget=forms.DateField(input_formats=['%Y-%m-%d']))
-    # gender = forms.ChoiceField(widget=forms.ChoiceField())
-    # weight = forms.DecimalField(widget=forms.DecimalField)
-    # height = forms.DecimalField(widget=forms.DecimalField)
 
     class Meta:
         model = Driver
         # fields = ['name', 'surname', 'email', 'birthday', 'gender', 'weight', 'height']
         exclude = ("creation",)
+        widgets = {
+            'name': forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': "Name"}),
+            'surname': forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': "Surname"}
+            ),
+            'email': forms.EmailInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': "Email"}
+            ),
+            'birthday': forms.DateInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': "DD-MM-YYYY"}
+            ),
+            'gender': forms.Select(
+                attrs={'class': 'form-control col-md-6', 'placeholder': "Male"}
+            ),
+            'weight': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6'}
+            ),
+            'height': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6'}
+            )
+        }

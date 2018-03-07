@@ -1,0 +1,13 @@
+.driver_inputs{
+    color: black;
+    font-size: medium;
+    align-content: center;
+
+}
+
+.driver_form{
+    align-content: center;
+    -webkit-column-width: 200px; /* Chrome, Safari, Opera */
+    -moz-column-width: 200px; /* Firefox */
+    column-width: 200px;
+}
