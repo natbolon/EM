@@ -19,10 +19,10 @@ class Driver(models.Model):
     name = models.CharField(max_length=200, default="")
     surname = models.CharField(max_length=200, default="")
     email = models.EmailField()
-    weight = models.DecimalField(decimal_places=2, max_digits=4, default=70)
-    height = models.DecimalField(decimal_places=1, max_digits=4, default=170)
+    weight = models.DecimalField(decimal_places=2, max_digits=4, default="")
+    height = models.DecimalField(decimal_places=1, max_digits=4, default="")
     gender = models.TextField(choices=[('M', 'Male'), ('F', 'Female')], default='M')
-    birthday = models.DateTimeField(default="YYYY-MM-DD")
+    birthday = models.DateTimeField()
     creation = models.DateTimeField(auto_now=True)
     #updated = models.DateTimeField(auto_now=True)
 

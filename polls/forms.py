@@ -24,9 +24,9 @@ class DriverForm(forms.ModelForm):
                 attrs={'class': 'form-control col-md-6', 'placeholder': "Male"}
             ),
             'weight': forms.NumberInput(
-                attrs={'class': 'form-control col-md-6'}
+                attrs={'class': 'form-control col-md-6', 'placeholder': "70.0"}
             ),
             'height': forms.NumberInput(
-                attrs={'class': 'form-control col-md-6'}
+                attrs={'class': 'form-control col-md-6', 'placeholder': "170"}
             )
         }

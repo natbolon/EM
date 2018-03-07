@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,149 +29,76 @@
 </div>
 
 <!-- panel preview -->
-<form method="post">
-    {% csrf_token %}
-    <div class="col-sm-5">
-        <h4>Register a new driver:</h4>
-        <div class="panel panel-default">
-            <div class="panel-body form-horizontal payment-form">
-                <div class="form-group">
-                    <!-- Name -->
-                    <label for="name" class="col-sm-3 control-label">Name</label>
-                    <div class="col-sm-9">
-                        {{ form.name }}
+<div align="center">
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-sm-3" style="background-color: #FFFFFF"></div>
+        <div class="col-sm-6" style="background-color: #FFFFFF">
+            <h4>Register a new driver:</h4>
+            <div class="panel panel-default">
+                <div class="panel-body form-horizontal payment-form"
+                     style="background-color: hsla(223, 90%, 46%, 0.51)">
+                    <div class="form-group">
+                        <!-- Name -->
+                        <label for="name" class="col-xs-3 control-label">Name:</label>
+                        <div class="col-sm-7">
+                            {{ form.name }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <!-- Surname -->
-                    <label for="Surname" class="col-sm-3 control-label">Surname</label>
-                    <div class="col-sm-9">
-                        {{ form.surname }}
+                    <div class="form-group">
+                        <!-- Surname -->
+                        <label for="Surname" class="col-xs-3 control-label">Surname:</label>
+                        <div class="col-sm-7">
+                            {{ form.surname }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <!-- Email -->
-                    <label for="Email" class="col-sm-3 control-label">Email</label>
-                    <div class="col-sm-9">
-                        {{ form.email }}
+                    <div class="form-group">
+                        <!-- Email -->
+                        <label for="Email" class="col-xs-3 control-label">Email:</label>
+                        <div class="col-sm-7">
+                            {{ form.email }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <!-- Weight -->
-                    <label for="Weight" class="col-sm-3 control-label">Weight</label>
-                    <div class="col-sm-9">
-                        {{ form.weight }}
+                    <div class="form-group">
+                        <!-- Weight -->
+                        <label for="Weight" class="col-xs-3 control-label">Weight:</label>
+                        <div class="col-sm-7">
+                            {{ form.weight }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <!-- Height -->
-                    <label for="Height" class="col-sm-3 control-label">Height</label>
-                    <div class="col-sm-9">
-                        {{ form.height }}
+                    <div class="form-group">
+                        <!-- Height -->
+                        <label for="Height" class="col-xs-3 control-label">Height:</label>
+                        <div class="col-sm-7">
+                            {{ form.height }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <!-- Gender -->
-                    <label for="Gender" class="col-sm-3 control-label">Gender</label>
-                    <div class="col-sm-9">
-                        {{ form.gender }}
+                    <div class="form-group">
+                        <!-- Gender -->
+                        <label for="Gender" class="col-xs-3 control-label">Gender:</label>
+                        <div class="col-sm-7">
+                            {{ form.gender }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="Birthday" class="col-sm-3 control-label">Birthday</label>
-                    <div class="col-sm-9">
-                        {{ form.birthday }}
+                    <div class="form-group">
+                        <label for="Birthday" class="col-xs-3 control-label">Birthday:</label>
+                        <div class="col-sm-7">
+                            {{ form.birthday }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12 text-right">
-                        <button type="submit" class="btn btn-default preview-add-button">
-                            <span class="glyphicon glyphicon-plus"></span> Submit
-                        </button>
+                    <div class="form-group">
+                        <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-default preview-add-button">
+                                <span class="glyphicon glyphicon-plus"></span> Add driver
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div> <!-- / panel preview -->
-</form>
-
-{% comment %}<form method="post">
-    {% csrf_token %}
-    {#    <!-- it renders the form with the names too '{ form.as_ul }'-->#}
-    {#    {{ form.as_ul }}#}
-    <div class="driver_form">
-        <label for="inputName" class="driver_inputs">Name</label>
-        {{ form.name }}
-        <br>
-        <label for="inputSurname" class="driver_inputs">Surname</label>
-        {{ form.surname }}
-    </div>
-    <br>
-    {{ form.gender }}
-    <br>
-    <button type="submit">Submit</button>
-</form>{% endcomment %}
-
-<!--
-<div class="container">
-    <h2>Register new driver</h2>
-    <br>
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputName">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputSurname">Surname</label>
-                <input type="text" class="form-control" id="surname" placeholder="Surname">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="etseibmotorsport@upc.edu">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputBirthday">Birthday</label>
-                <input type="date" class="form-control" id="birthday" placeholder="DD-MM-YYYY">
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputHeight">Height</label>
-                <input type="text" class="form-control" id="height" placeholder="170cm">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputWeight">Weight</label>
-                <input type="text" class="form-control" id="weight" placeholder="70.0kg">
-            </div>
-            <div class="form-group col-md-4">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                           value="option1"
-                           checked>
-                    <label class="form-check-label" for="exampleRadios1">
-                        Male
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                           value="option2">
-                    <label class="form-check-label" for="exampleRadios2">
-                        Female
-                    </label>
-                </div>
-            </div>
-
-        </div>
-        <br><br>
-
-        <button type="submit" class="btn btn-primary align-left">Submit</button>
+        </div> <!-- / panel preview -->
     </form>
 </div>
--->
+
 
 </body>
 </html>
