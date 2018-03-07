@@ -6,6 +6,7 @@
     <title>Drivers</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -17,14 +18,55 @@
     {% include 'blocks/nav.html' %}
     <h1 align="center">CAT10e</h1>
 </div>
-
-<p>Halo</p>
-{% for driver in object_list %}
-    <li>{{ driver.name }}</li>
-{% empty %}
-    <li>No articles yet.</li>
-{% endfor %}
-</ul>
+<div class="col-sm-2"></div>
+<div class="col-sm-8" align="center">
+    <h4>Drivers:</h4>
+    <div class="row">
+        <div class="col-xs-12">
+            {% if driver_list %}
+                <div class="table-responsive">
+                <table class="table preview-table" align="center">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Gender</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>Birthday</th>
+                </tr>
+                </thead>
+                {% for driver in object_list %}
+                    <tbody>
+                    <tr>
+                        <th>{{ driver.name }}</th>
+                        <th>{{ driver.surname }}</th>
+                        <th>{{ driver.gender }}</th>
+                        <th>{{ driver.weight }}</th>
+                        <th>{{ driver.height }}</th>
+                        <th>{{ driver.birthday }}</th>
+                    </tr>
+                    </tbody> <!-- preview content goes here-->
+                {% empty %}
+                    <tbody>
+                    <tr>
+                        <th>No drivers yet</th>
+                        <th>""</th>
+                        <th>""</th>
+                        <th>""</th>
+                        <th>""</th>
+                        <th>""</th>
+                    </tr>
+                    </tbody>
+                {% endfor %}
+            {% else %}
+                <p>No Drivers yet</p>
+            {% endif %}
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
