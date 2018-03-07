@@ -18,7 +18,7 @@ class DriverForm(forms.ModelForm):
                 attrs={'class': 'form-control col-md-6', 'placeholder': "Email"}
             ),
             'birthday': forms.DateInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': "DD-MM-YYYY"}
+                attrs={'class': 'form-control col-md-6', 'placeholder': "YYYY-MM-DD"}
             ),
             'gender': forms.Select(
                 attrs={'class': 'form-control col-md-6', 'placeholder': "Male"}

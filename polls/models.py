@@ -22,7 +22,7 @@ class Driver(models.Model):
     weight = models.DecimalField(decimal_places=2, max_digits=4, default="")
     height = models.DecimalField(decimal_places=1, max_digits=4, default="")
     gender = models.TextField(choices=[('M', 'Male'), ('F', 'Female')], default='M')
-    birthday = models.DateTimeField()
+    birthday = models.DateField()
     creation = models.DateTimeField(auto_now=True)
     #updated = models.DateTimeField(auto_now=True)
 
