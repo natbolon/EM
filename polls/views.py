@@ -2,28 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 from django.template import loader
 from django.views import generic
+from django_tables2 import RequestConfig
 
-from .models import Question, Choice, Driver
+from polls.tables import DriverTable
+from .models import Driver
 from .forms import DriverForm
-
-
-class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Question.objects.order_by('-pub_date')[:5]
-
-
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = 'polls/detail.html'
-
-
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'polls/results.html'
 
 
 class new_driver(generic.TemplateView):
@@ -42,17 +25,26 @@ class new_driver(generic.TemplateView):
         form = DriverForm(request.POST)
         if form.is_valid():
             form.save()
-            posts = Driver.objects.all()
-            args = {'form': form, 'posts': posts}
-            return redirect('/polls/drivers', args)
+            table = DriverTable(Driver.objects.all())
+            RequestConfig(request).configure(table)
+            return redirect('../drivers', {'table': table})
+            # posts = Driver.objects.all()
+            # args = {'form': form, 'posts': posts}
+            # return redirect('/polls/drivers', args)
 
         return render(request, self.template_name, {'form': form})
 
+#
+# class Drivers(generic.ListView):
+#     # inherits froms TemplateView class
+#     template_name = 'polls/drivers.html'
+#     model = Driver
 
-class Drivers(generic.ListView):
-    # inherits froms TemplateView class
-    template_name = 'polls/drivers.html'
-    model = Driver
+
+def Drivers(request):
+    table = DriverTable(Driver.objects.all())
+    RequestConfig(request).configure(table)
+    return render(request, 'polls/drivers.html', {'table': table})
 
 
 def home(request):
@@ -66,7 +58,6 @@ class acceleration(generic.TemplateView):
 
 def new_testing(request):
     return render(request, 'polls/new_testing.html', )
-
 
 # def index(request):
 #     latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -93,21 +84,3 @@ def new_testing(request):
 # def results(request, question_id):
 #     question = get_object_or_404(Question, pk=question_id)
 #     return render(request, 'polls/results.html', {'question': question})
-
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'polls/detail.html', {
-            'question': question,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))

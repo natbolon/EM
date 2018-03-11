@@ -1,6 +1,6 @@
+import datetime
+
 from django.db import models
-from datetime import datetime
-from django.utils import timezone
 
 
 # each class represents a databased field in the model
@@ -24,19 +24,42 @@ class Driver(models.Model):
     gender = models.TextField(choices=[('M', 'Male'), ('F', 'Female')], default='M')
     birthday = models.DateField()
     creation = models.DateTimeField(auto_now=True)
-    #updated = models.DateTimeField(auto_now=True)
+
+    # updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
-    def age(self):
-        return self.creation - self.birthday
+    @property
+    def compute_age(self):
+        delta = datetime.date.today() - self.birthday
+        return int(delta.days / 365)
+
+    age = compute_age
 
 
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+class Testing(models.Model):
+    driver = models.ForeignKey('Driver', on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=True)
+    location = models.CharField(max_length=200, default="")
 
     def __str__(self):
-        return self.choice_text
+        return self.date.strftime('%H:%M - %d-%m-%Y')
+
+    # @property
+    # def order(self):
+    #    return next(self)
+
+
+class Acceleration(models.Model, models.Testing):
+    front_camber = models.DecimalField(decimal_places=2, max_digits=3, default="")
+    rear_camber = models.DecimalField(decimal_places=2, max_digits=3, default="")
+    front_toe = models.DecimalField(decimal_places=2, max_digits=3, default="")
+    rear_toe = models.DecimalField(decimal_places=2, max_digits=3, default="")
+    front_pressure = models.DecimalField(decimal_places=2, max_digits=3, default="")
+    rear_pressure = models.DecimalField(decimal_places=2, max_digits=3, default="")
+    front_weight = models.DecimalField(decimal_places=2, max_digits=4, default="")
+    rear_weight = models.DecimalField(decimal_places=2, max_digits=4, default="")
+
+    def __str__(self):
+        return self.models.Testing.date.strftime('%H:%M - %d-%m-%Y')
