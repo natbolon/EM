@@ -4,9 +4,33 @@ from django.template import loader
 from django.views import generic
 from django_tables2 import RequestConfig
 
-from polls.tables import DriverTable
-from .models import Driver
-from .forms import DriverForm
+from polls.tables import DriverTable, TestingTable
+from .models import Driver, Testing
+from .forms import DriverForm, NewTestingForm
+
+
+class New_Testing(generic.TemplateView):
+    model = Testing
+    template_name = 'polls/new_testing.html'
+
+    def get(self, request):
+        form = NewTestingForm()
+        posts = Testing.objects.all()
+
+        args = {'form': form, 'posts': posts}
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        form = NewTestingForm(request.POST)
+        if form.is_valid():
+            print('is valid')
+            form.save()
+            table = TestingTable(Testing.objects.all())
+            RequestConfig(request).configure(table)
+            # REDIRECT IS NOW AT AN INCORRECT PAGE!!
+            return redirect('../acceleration', {'table': table})
+
+        return render(request, self.template_name, {'form': form})
 
 
 class new_driver(generic.TemplateView):
@@ -34,12 +58,6 @@ class new_driver(generic.TemplateView):
 
         return render(request, self.template_name, {'form': form})
 
-#
-# class Drivers(generic.ListView):
-#     # inherits froms TemplateView class
-#     template_name = 'polls/drivers.html'
-#     model = Driver
-
 
 def Drivers(request):
     table = DriverTable(Driver.objects.all())
@@ -51,13 +69,11 @@ def home(request):
     return render(request, 'polls/home.html')
 
 
-class acceleration(generic.TemplateView):
+def acceleration(request):
     # inherits froms TemplateView class
     template_name = 'polls/acceleration.html'
-
-
-def new_testing(request):
-    return render(request, 'polls/new_testing.html', )
+    table = TestingTable(Testing.objects.all())
+    return render(request, template_name, {'table': table})
 
 # def index(request):
 #     latest_question_list = Question.objects.order_by('-pub_date')[:5]

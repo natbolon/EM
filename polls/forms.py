@@ -1,9 +1,8 @@
 from django import forms
-from .models import Driver
+from .models import Driver, Testing
 
 
 class DriverForm(forms.ModelForm):
-
     class Meta:
         model = Driver
         # fields = ['name', 'surname', 'email', 'birthday', 'gender', 'weight', 'height']
@@ -30,3 +29,17 @@ class DriverForm(forms.ModelForm):
                 attrs={'class': 'form-control col-md-6', 'placeholder': "170"}
             )
         }
+
+
+class NewTestingForm(forms.ModelForm):
+    class Meta:
+        model = Testing
+        # drivers = Driver.objects.all()
+        widgets = {
+            # 'driver': forms.ModelMultipleChoiceField(queryset=drivers, to_field_name='name'
+            #                                         ),
+            'location': forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'IN4 Montmelo'}
+            )
+        }
+        exclude = ("",)

@@ -1,3 +1,4 @@
+{% load render_table from django_tables2 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +19,11 @@
 
 <div>
     <form method="post">
-        {% csrf_token %}
-        <p>Driver:</p>
-        <input>
-        <button type="submit">Submit</button>
+        <div class="col-md-12">
+            {% csrf_token %}
+            <p>Testing Sessions:</p>
+            {% render_table table %}
+        </div>
     </form>
 
 </div>

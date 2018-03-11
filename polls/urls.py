@@ -10,7 +10,7 @@ urlpatterns = [
     # path('<int:question_id>/vote/', views.vote, name='vote'),
     path('home/', views.home, name='home'),
     path('new_driver/', views.new_driver.as_view(), name='new_driver'),
-    path('new_testing/', views.new_testing, name='new_testing'),
-    path('acceleration/', views.acceleration.as_view(), name='acceleration'),
+    path('new_testing/', views.New_Testing.as_view(), name='new_testing'),
+    path('acceleration/', views.acceleration, name='acceleration'),
     path('drivers/', views.Drivers, name='drivers')
 ]

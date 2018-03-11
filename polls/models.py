@@ -25,10 +25,11 @@ class Driver(models.Model):
     birthday = models.DateField()
     creation = models.DateTimeField(auto_now=True)
 
-    # updated = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
 
     @property
     def compute_age(self):
@@ -39,12 +40,13 @@ class Driver(models.Model):
 
 
 class Testing(models.Model):
-    driver = models.ForeignKey('Driver', on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now=True)
+    # driver = models.ForeignKey('Driver', on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now=True)
     location = models.CharField(max_length=200, default="")
 
     def __str__(self):
-        return self.date.strftime('%H:%M - %d-%m-%Y')
+
+        return self.time.strftime('%H:%M - %d-%m-%Y')
 
     # @property
     # def order(self):

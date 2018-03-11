@@ -7,3 +7,9 @@ class DriverTable(tables.Table):
         model = Driver
         template_name = 'django_tables2/bootstrap-responsive.html'
         sequence = ('name', 'surname', 'email', 'weight', 'height', 'gender', 'birthday', 'creation')
+
+
+class TestingTable(tables.Table):
+    class Meta:
+        model = Testing
+        template_name = 'django_tables2/bootstrap-responsive.html'
