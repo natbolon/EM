@@ -34,12 +34,13 @@ class DriverForm(forms.ModelForm):
 class NewTestingForm(forms.ModelForm):
     class Meta:
         model = Testing
-        # drivers = Driver.objects.all()
+
         widgets = {
-            # 'driver': forms.ModelMultipleChoiceField(queryset=drivers, to_field_name='name'
-            #                                         ),
+            'driver': forms.ModelMultipleChoiceField(['Gerard', 'Marc', 'Oriol']),
             'location': forms.TextInput(
                 attrs={'class': 'form-control col-md-6', 'placeholder': 'IN4 Montmelo'}
-            )
+
+            ),
+            'event': forms.Select()
         }
         exclude = ("",)

@@ -23,7 +23,6 @@ class New_Testing(generic.TemplateView):
     def post(self, request):
         form = NewTestingForm(request.POST)
         if form.is_valid():
-            print('is valid')
             form.save()
             table = TestingTable(Testing.objects.all())
             RequestConfig(request).configure(table)

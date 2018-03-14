@@ -26,6 +26,9 @@
             {{ form }}
             <br>
         </div>
+        <div class="col-sm-4 text-left">
+            <br>
+        </div>
     </div>
 
     <div class="form-group">
@@ -36,6 +39,22 @@
         </div>
     </div>
 </form>
+<!-- This part is not working as the POST must be done before the table is avaliable so it can render it! -->
+<div class="form-group">
+    <div class="col-sm-8 text-left">
+        <p>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                Button with data-target
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                {% include 'blocks/acceleration_request.html' %}
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
