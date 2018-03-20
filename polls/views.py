@@ -47,6 +47,7 @@ class new_driver(generic.TemplateView):
     def post(self, request):
         form = DriverForm(request.POST)
         if form.is_valid():
+            print('is valid')
             form.save()
             table = DriverTable(Driver.objects.all())
             RequestConfig(request).configure(table)
@@ -54,7 +55,7 @@ class new_driver(generic.TemplateView):
             # posts = Driver.objects.all()
             # args = {'form': form, 'posts': posts}
             # return redirect('/polls/drivers', args)
-
+        print(form.errors)
         return render(request, self.template_name, {'form': form})
 
 

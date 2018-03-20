@@ -16,14 +16,14 @@ class DriverForm(forms.ModelForm):
             'email': forms.EmailInput(
                 attrs={'class': 'form-control col-md-6', 'placeholder': "Email"}
             ),
-            'birthday': forms.DateInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': "YYYY-MM-DD"}
+            'birthday': forms.DateTimeInput(
+                attrs={'class': 'datetime-input', 'placeholder': "YYYY-MM-DD"}
             ),
             'gender': forms.Select(
                 attrs={'class': 'form-control col-md-6', 'placeholder': "Male"}
             ),
             'weight': forms.NumberInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': "70.0"}
+                attrs={'class': 'form-control col-md-6', 'placeholder': "70"}
             ),
             'height': forms.NumberInput(
                 attrs={'class': 'form-control col-md-6', 'placeholder': "170"}
