@@ -1,0 +1,44 @@
+<!-- Navigation bar-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <!-- hamburguer icon for the collapsable menu -->
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://etseib-motorsport.upc.edu/es/inicio/">ETSEIB Motorsport</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <!-- elements inside the navigation bar -->
+                <li><a href="/testing/home">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Old testing sessions<span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <!--#com fer que s'amplii per mes? -->
+                        <li><a href="/testing">Mes 1</a></li>
+                        <li><a href="#">Mes 2</a></li>
+                        <li><a href="#">Mes 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="/testing/new_testing">New testing session</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Drivers<span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/testing/drivers">Drivers</a></li>
+                        <li><a href="/testing/new_driver">Register new driver</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            {% comment %}<ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>{% endcomment %}
+        </div>
+    </div>
+</nav>
