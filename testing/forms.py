@@ -38,10 +38,9 @@ class NewTestingForm(forms.ModelForm):
         widgets = {
             'driver': forms.ModelMultipleChoiceField(['Gerard', 'Marc', 'Oriol']),
             'location': forms.TextInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'IN4 Montmelo'}
-
-            ),
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'IN4 Montmelo'}),
             'event': forms.Select(),
+
             'mode': forms.NumberInput(
                 attrs={'class': 'form-control col-md-6'}),
             'cont_current_p': forms.NumberInput(
@@ -54,9 +53,36 @@ class NewTestingForm(forms.ModelForm):
                 attrs={'class': 'form-control col-md-6', 'placeholder': 'Peak current'}),
             'kp_speed': forms.NumberInput(
                 attrs={'class': 'form-control col-md-6', 'placeholder': 'Peak current'}),
-
             'ti_speed': forms.NumberInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'Peak current'})
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Peak current'}),
 
+            'fw_flap1_degrees': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Front Wing Flap1'}),
+            'fw_flap2_degrees': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Front Wing Flap2'}),
+            'rw_flap1_degrees': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Rear Wing Flap1'}),
+            'rw_flap2_degrees': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Rear Wing Flap2'}),
+            'drs': forms.CheckboxInput(
+                attrs={}),
+
+            'front_camber': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Front Camber'}),
+            'rear_camber': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Rear Camber'}),
+            'front_toe': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Front Toe'}),
+            'rear_toe': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Rear Toe'}),
+            'front_pressure': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Front Pressure'}),
+            'rear_pressure': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Rear Pressure'}),
+            'front_weight': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Front Weight'}),
+            'rear_weight': forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Rear Weight'})
         }
         exclude = ("",)
+
