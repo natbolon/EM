@@ -92,7 +92,7 @@ class PowertrainParams(models.Model):
 
 
 class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
-    when = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(auto_now=True)
     location = models.CharField(max_length=200, default="")
     event = models.TextField(choices=[('Acceleration', 'Acceleration'), ('Skid Pad', 'Skid Pad'),
                                       ('Autocross', 'Autocross'), ('Endurance', 'Endurance')],
@@ -100,8 +100,9 @@ class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
     comments = models.TextField(max_length=20000, default="", blank=True)
 
     driver = models.ForeignKey(
-        Driver, related_query_name='driver', on_delete=models.SET('Ghost driver'), null=True)
+        Driver, related_query_name='driver', on_delete=models.CASCADE
+    )
 
     def __str__(self):
         # return self.time.strftime('%H:%M - %d-%m-%Y')
-        return self.id
+        return self.date.strftime('%H:%M - %d-%m-%Y')

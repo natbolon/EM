@@ -25,11 +25,16 @@ class New_Testing(generic.TemplateView):
         form = NewTestingForm(request.POST)
         if form.is_valid():
             form.save()
+            data = Testing.objects.last()
             table = TestingTable(Testing.objects.all())
             RequestConfig(request).configure(table)
+            args = {'table': table, 'data': data}
             # REDIRECT IS NOW AT AN INCORRECT PAGE!!
-            return redirect('../acceleration', {'table': table})
+            # USE render! If redirect display of info does not work
 
+            print('heloo')
+            return render(request, "testing/acceleration.html", args)
+        print(form.errors)
         return render(request, self.template_name, {'form': form})
 
 
@@ -48,11 +53,10 @@ class new_driver(generic.TemplateView):
     def post(self, request):
         form = DriverForm(request.POST)
         if form.is_valid():
-            print('is valid')
             form.save()
-            table = DriverTable(Driver.objects.all())
-            RequestConfig(request).configure(table)
-            return redirect('../drivers', {'table': table})
+            table_driver = DriverTable(Driver.objects.all())
+            RequestConfig(request).configure(table_driver)
+            return redirect('../drivers', {'table': table_driver})
             # posts = Driver.objects.all()
             # args = {'form': form, 'posts': posts}
             # return redirect('/testing/drivers', args)
@@ -72,9 +76,13 @@ def home(request):
 
 def acceleration(request):
     # inherits froms TemplateView class
-    template_name = 'testing/acceleration.html'
+    data = Testing.objects.last()
     table = TestingTable(Testing.objects.all())
-    return render(request, template_name, {'table': table})
+    RequestConfig(request).configure(table)
+    args = {'table': table, 'data': data}
+    # REDIRECT IS NOW AT AN INCORRECT PAGE!!
+    # USE render! If redirect display of info does not work
+    return render(request, "testing/acceleration.html", args)
 
 # def index(request):
 #     latest_question_list = Question.objects.order_by('-pub_date')[:5]
