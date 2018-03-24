@@ -51,6 +51,8 @@ class DynamicParams(models.Model):
     rear_pressure = models.DecimalField(decimal_places=2, max_digits=3, default=0)
     front_weight = models.DecimalField(decimal_places=2, max_digits=4, default=0)
     rear_weight = models.DecimalField(decimal_places=2, max_digits=4, default=0)
+    front_height = models.DecimalField(decimal_places=2, max_digits=4, default=0)
+    rear_height = models.DecimalField(decimal_places=2, max_digits=4, default=0)
 
     class Meta:
         abstract = True
@@ -95,10 +97,10 @@ class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
     event = models.TextField(choices=[('Acceleration', 'Acceleration'), ('Skid Pad', 'Skid Pad'),
                                       ('Autocross', 'Autocross'), ('Endurance', 'Endurance')],
                              default='Acceleration')
-    comments = models.TextField(max_length=2000, default="")
+    comments = models.TextField(max_length=20000, default="", blank=True)
 
-    # driver = models.ForeignKey(Driver.name, related_query_name='driver', on_delete=models.SET('Ghost driver'),
-    #                           null=True)
+    driver = models.ForeignKey(
+        Driver, related_query_name='driver', on_delete=models.SET('Ghost driver'), null=True)
 
     def __str__(self):
         # return self.time.strftime('%H:%M - %d-%m-%Y')

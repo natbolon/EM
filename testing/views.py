@@ -15,6 +15,7 @@ class New_Testing(generic.TemplateView):
 
     def get(self, request):
         form = NewTestingForm()
+        form.fields['driver'].queryset = Driver.objects.all()
         posts = Testing.objects.all()
 
         args = {'form': form, 'posts': posts}

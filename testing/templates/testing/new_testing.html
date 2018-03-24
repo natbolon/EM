@@ -28,7 +28,7 @@
                      style="background-color: #d5eef3">
                     <div class="form-group">
                         <!-- Name -->
-                        <label for="name" class="col-xs-3 control-label">Name:</label>
+                        <label for="name" class="col-xs-3 control-label">Driver:</label>
                         <div class="col-sm-7">
                             {{ form.driver }}
                         </div>
@@ -47,6 +47,7 @@
                             {{ form.event }}
                         </div>
                     </div>
+
 
                     <div class="form-line" data-type="control_divider" id="id_9">
                         <div id="cid_9" class="form-input-wide">
@@ -114,8 +115,6 @@
                     </div>
 
 
-
-
                     <div class="form-line" data-type="control_divider" id="id_9">
                         <div id="cid_9" class="form-input-wide">
                             <div data-component="divider"
@@ -129,6 +128,76 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Front Camber -->
+                        <label for="Event" class="col-sm-3 control-label">Front Camber:</label>
+                        <div class="col-sm-3">
+                            {{ form.front_camber }}
+                        </div>
+
+                        <!-- Rear Camber -->
+                        <label for="Event" class="col-sm-3 control-label">Rear Camber:</label>
+                        <div class="col-sm-3">
+                            {{ form.rear_camber }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Front Toe -->
+                        <label for="Event" class="col-sm-3 control-label">Front Toe:</label>
+                        <div class="col-sm-3">
+                            {{ form.front_toe }}
+                        </div>
+
+                        <!-- Rear Toe -->
+                        <label for="Event" class="col-sm-3 control-label">Rear Toe:</label>
+                        <div class="col-sm-3">
+                            {{ form.rear_toe }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Front Pressure -->
+                        <label for="Event" class="col-sm-3 control-label">Front Pressure:</label>
+                        <div class="col-sm-3">
+                            {{ form.front_pressure }}
+                        </div>
+
+                        <!-- Rear Pressure -->
+                        <label for="Event" class="col-sm-3 control-label">Rear Pressure:</label>
+                        <div class="col-sm-3">
+                            {{ form.rear_pressure }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Front Height -->
+                        <label for="Event" class="col-sm-3 control-label">Front Height:</label>
+                        <div class="col-sm-3">
+                            {{ form.front_height }}
+                        </div>
+
+                        <!-- Rear Height -->
+                        <label for="Event" class="col-sm-3 control-label">Rear Height:</label>
+                        <div class="col-sm-3">
+                            {{ form.rear_height }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Front Weight -->
+                        <label for="Event" class="col-sm-3 control-label">Front Weight:</label>
+                        <div class="col-sm-3">
+                            {{ form.front_weight }}
+                        </div>
+
+                        <!-- Rear Weight -->
+                        <label for="Event" class="col-sm-3 control-label">Rear Weight:</label>
+                        <div class="col-sm-3">
+                            {{ form.rear_weight }}
+                        </div>
                     </div>
 
 
@@ -180,6 +249,28 @@
                         <label for="Event" class="col-sm-3 control-label">Rear Wing Flap 2:</label>
                         <div class="col-sm-3">
                             {{ form.rw_flap2_degrees }}
+                        </div>
+                    </div>
+
+                    <div class="form-line" data-type="control_divider" id="id_9">
+                        <div id="cid_9" class="form-input-wide">
+                            <div data-component="divider"
+                                 style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                            </div>
+                        </div>
+                        <p align="center" style="font-size: medium">COMMENTS</p>
+                        <div id="cid_9" class="form-input-wide">
+                            <div data-component="divider"
+                                 style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group" align="center">
+                        <!-- DRS -->
+                        <div class="col-sm-10" align="center">
+                            {{ form.comments }}
                         </div>
                     </div>
 
