@@ -1,5 +1,8 @@
 from django import forms
-from .models import Driver, Testing
+from django.forms import TextInput
+from django.utils.dateparse import parse_duration
+
+from .models import Driver, Testing, Acceleration
 
 
 class DriverForm(forms.ModelForm):
@@ -90,3 +93,16 @@ class NewTestingForm(forms.ModelForm):
         )
 
         exclude = ("",)
+
+
+class AccForm(forms.ModelForm):
+    class Meta:
+        model = Acceleration
+
+        exclude = ('length',)
+
+        widgets = dict(
+            time=forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
+            )
+        )

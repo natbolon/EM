@@ -6,7 +6,7 @@ from django_tables2 import RequestConfig
 
 from testing.tables import DriverTable, TestingTable
 from .models import Driver, Testing
-from .forms import DriverForm, NewTestingForm
+from .forms import DriverForm, NewTestingForm, AccForm
 
 
 class New_Testing(generic.TemplateView):
@@ -25,15 +25,21 @@ class New_Testing(generic.TemplateView):
         form = NewTestingForm(request.POST)
         if form.is_valid():
             form.save()
-            data = Testing.objects.last()
+            data = Testing.objects.all()[::-1][0]
             table = TestingTable(Testing.objects.all())
             RequestConfig(request).configure(table)
-            args = {'table': table, 'data': data}
+            event = data.event
+            if event == "Acceleration":
+                print('heloo')
+                run = AccForm()
+            else:
+                print(event)
+                run = AccForm()
+            args = {'table': table, 'data': data, 'run': run}
             # REDIRECT IS NOW AT AN INCORRECT PAGE!!
             # USE render! If redirect display of info does not work
 
-            print('heloo')
-            return render(request, "testing/acceleration.html", args)
+            return render(request, "testing/event.html", args)
         print(form.errors)
         return render(request, self.template_name, {'form': form})
 
@@ -82,7 +88,7 @@ def acceleration(request):
     args = {'table': table, 'data': data}
     # REDIRECT IS NOW AT AN INCORRECT PAGE!!
     # USE render! If redirect display of info does not work
-    return render(request, "testing/acceleration.html", args)
+    return render(request, "testing/event.html", args)
 
 # def index(request):
 #     latest_question_list = Question.objects.order_by('-pub_date')[:5]

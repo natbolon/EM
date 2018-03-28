@@ -2,8 +2,24 @@ import datetime
 
 from django.db import models
 
-
 # each class represents a databased field in the model
+from django.utils.dateparse import parse_duration
+
+
+class Duration(models.Field):
+    def _format_value(self, value):
+        duration = parse_duration(value)
+
+        seconds = duration.seconds
+        microseconds = duration.microseconds
+
+        minutes = seconds // 60
+        seconds = seconds % 60
+
+        minutes = minutes % 60
+
+        return '{:02d}:{:02d}.{:03d}'.format(minutes, seconds, microseconds)
+
 
 class Question(models.Model):
     # Field type: CharField or DateTimeField
@@ -94,7 +110,7 @@ class PowertrainParams(models.Model):
 class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
     date = models.DateTimeField(auto_now=True)
     location = models.CharField(max_length=200, default="")
-    event = models.TextField(choices=[('Acceleration', 'Acceleration'), ('Skid Pad', 'Skid Pad'),
+    event = models.TextField(choices=[('Acceleration', 'Acceleration'), ('SP', 'Skid Pad'),
                                       ('Autocross', 'Autocross'), ('Endurance', 'Endurance')],
                              default='Acceleration')
     comments = models.TextField(max_length=20000, default="", blank=True)
@@ -106,3 +122,50 @@ class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
     def __str__(self):
         # return self.time.strftime('%H:%M - %d-%m-%Y')
         return self.date.strftime('%H:%M - %d-%m-%Y')
+
+    class Meta:
+        order_with_respect_to = 'date'
+
+
+class Acceleration(Testing):
+    length = 75
+    time = models.CharField(max_length=7)
+
+    def run(self):
+        s, ms = str(self.time).split('.')
+        return datetime.timedelta(seconds=s, milliseconds=ms)
+
+    # def __str__(self):
+    #     return '{:02d}.{:03d}'.format(self.run.seconds, self.run.microseconds)
+
+    class Meta(Testing.Meta):
+        pass
+
+
+class SkidPad(Testing):
+    length_lap = 57.33
+    total_length = 229.33
+    l1_time = models.DurationField()
+    l2_time = models.DurationField()
+    r1_time = models.DurationField()
+    r2_time = models.DurationField()
+
+    @property
+    def time(self):
+        return self.l1_time + self.l2_time + self.r1_time + self.r2_time
+
+
+class Autocross(Testing):
+    length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
+    time = models.DurationField()
+
+
+class Endurance(Testing):
+    length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
+    total_length = 22000
+
+    # THINK HOW TO HANDLE LAPS. INTENTION: CREATE A VARIABLE (LIST) THAT STORES ALL THE LAP TIMES AND
+    # ARISES A WARNING WHEN REACHED THE LAST LAP
+
+    def laps(self):
+        return int(self.total_length / self.length_lap)
