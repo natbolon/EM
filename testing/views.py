@@ -30,8 +30,7 @@ class New_Testing(generic.TemplateView):
             RequestConfig(request).configure(table)
             event = data.event
             if event == "Acceleration":
-                print('heloo')
-                run = AccForm()
+                return acceleration(request, data, table)
             else:
                 print(event)
                 run = AccForm()
@@ -80,38 +79,16 @@ def home(request):
     return render(request, 'testing/home.html')
 
 
-def acceleration(request):
+def acceleration(request, data=None, table=None):
     # inherits froms TemplateView class
-    data = Testing.objects.last()
-    table = TestingTable(Testing.objects.all())
+    if data == None:
+        data = Testing.objects.all()[::-1][0]
+    if table == None:
+        table = TestingTable(Testing.objects.all())
     RequestConfig(request).configure(table)
-    args = {'table': table, 'data': data}
-    # REDIRECT IS NOW AT AN INCORRECT PAGE!!
+    run = AccForm()
+    args = {'table': table, 'data': data, 'run': run}
+    print('correct path')
     # USE render! If redirect display of info does not work
     return render(request, "testing/event.html", args)
 
-# def index(request):
-#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
-#     context = {'latest_question_list': latest_question_list}
-#     return render(request, 'testing/index.html', context)
-# #The render() function takes the request object as its first argument,
-# # a template name as its second argument and a dictionary as its optional third argument.
-# # It returns an HttpResponse object of the given template rendered with the given context.
-# # The context is a dictionary mapping template variable names to Python objects.
-#
-#
-# def detail(request, question_id):
-#     try:
-#         question = Question.objects.get(pk=question_id)
-#     except Question.DoesNotExist:
-#         raise Http404("Question does not exist")
-#     return render(request, 'testing/detail.html', {'question': question})
-#
-# #alternative with django shortcut
-# # def detail(request, question_id):
-# #     question = get_object_or_404(Question, pk=question_id)
-# #     return render(request, 'testing/detail.html', {'question': question})
-#
-# def results(request, question_id):
-#     question = get_object_or_404(Question, pk=question_id)
-#     return render(request, 'testing/results.html', {'question': question})

@@ -1,0 +1,177 @@
+{% load render_table from django_tables2 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Testing session</title>
+</head>
+<body>
+
+<div class="page-header">
+    {% include 'blocks/nav.html' %}
+    <h1 align="center">{{ data.event }}</h1>
+</div>
+
+
+<div class="container col-sm-5" style="padding-left: 20px">
+
+    <div class="row">
+        <h3 class="col-sm-6">Testing session #{{ data.id }}</h3>
+    </div>
+
+    <div class="row">
+        <p class="col-sm-2" style="font-size: large">Location:</p>
+        <p class="col-sm-6" style="font-size: medium">{{ data.location }}</p>
+    </div>
+
+    <div class="row">
+        <p class="col-sm-2" style="font-size: large">Driver:</p>
+        <p class="col-sm-6" style="font-size: medium">{{ data.driver.name }} {{ data.driver.surname }}</p>
+    </div>
+
+    <div class="row">
+        <p class="col-sm-2" style="font-size: large">Date:</p>
+        <p class="col-sm-6" style="font-size: medium">{{ data.date }}</p>
+    </div>
+
+    <div class="row">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+
+    <div class="row">
+        <p class="span4 col-sm-2" style="font-size: large">Time:</p>
+        <p class="span2 col-sm-5" style="font-size: medium">{{ run.time }}</p>
+    </div>
+
+</div>
+
+
+<div id=Setup class="container col-sm-7" style="padding-right: 20px">
+    <h3>Set up</h3>
+    <p>Configuration for current testing session:</p>
+    <div class="row">
+        <a class="col-sm-4" data-toggle="collapse" href="#dyn" style="font-size: large">Dynamic parameters</a>
+    </div>
+
+    <div id="dyn" class="container collapse in col-sm-12" style="padding-right: 20px">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+
+                    <th>Front Camber</th>
+                    <th>Rear Camber</th>
+                    <th>Front Toe</th>
+                    <th>Rear Toe</th>
+                    <th>Front Pressure</th>
+                    <th>Rear Pressure</th>
+                    <th>Front Weight</th>
+                    <th>Rear Weight</th>
+                    <th>Front Height</th>
+                    <th>Rear Height</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ data.front_camber }}</td>
+                    <td>{{ data.rear_camber }}</td>
+                    <td>{{ data.front_toe }}</td>
+                    <td>{{ data.rear_toe }}</td>
+                    <td>{{ data.front_pressure }}</td>
+                    <td>{{ data.rear_pressure }}</td>
+                    <td>{{ data.front_weight }}</td>
+                    <td>{{ data.rear_weight }}</td>
+                    <td>{{ data.front_height }}</td>
+                    <td>{{ data.rear_height }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <a class="col-sm-4" data-toggle="collapse" href="#aer" style="font-size: large">Aerodynamic parameters</a>
+    </div>
+    <div id="aer" class="container collapse in col-sm-12" style="padding-right: 20px">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>DRS enabled</th>
+                    <th>Front Wing Flap1</th>
+                    <th>Front Wing Flap2</th>
+                    <th>Rear Wing Flap1</th>
+                    <th>Rear Wing Flap2</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ data.drs }}</td>
+                    <td>{{ data.fw_flap1_degrees }}</td>
+                    <td>{{ data.fw_flap2_degrees }}</td>
+                    <td>{{ data.rw_flap1_degrees }}</td>
+                    <td>{{ data.rw_flap2_degrees }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <a class="col-sm-4" data-toggle="collapse" href="#pwt" style="font-size: large">Powertrain parameters</a>
+    </div>
+    <div id="pwt" class="container collapse in col-sm-12" style="padding-right: 20px">
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Mode</th>
+                    <th>Continuous current</th>
+                    <th>Peak current</th>
+                    <th>KP Current</th>
+                    <th>TI Current</th>
+                    <th>KP Speed</th>
+                    <th>TI Speed</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ data.mode }}</td>
+                    <td>{{ data.cont_current_p }}</td>
+                    <td>{{ data.peak_current_p }}</td>
+                    <td>{{ data.kp_current }}</td>
+                    <td>{{ data.ti_current }}</td>
+                    <td>{{ data.kp_speed }}</td>
+                    <td>{{ data.ti_speed }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+{% comment %}<div>
+    <form method="post">
+        <div class="col-md-12">
+            {% csrf_token %}
+            <p>Testing Sessions:</p>
+            {% render_table table %}
+        </div>
+    </form>
+
+</div>{% endcomment %}
+
+</body>
+</html>

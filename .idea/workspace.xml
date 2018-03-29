@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc29bee-ce85-40cb-bf70-e5d4991664ff" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/testing/migrations/0003_auto_20180324_1110.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/testing/migrations/0004_auto_20180324_1205.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/testing/migrations/0005_auto_20180326_1411.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/testing/migrations/0006_auto_20180328_0954.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/testing/migrations/0007_auto_20180328_1548.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/testing/templates/testing/event.html" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change beforePath="$PROJECT_DIR$/testing/forms.py" afterPath="$PROJECT_DIR$/testing/forms.py" />
-      <change beforePath="$PROJECT_DIR$/testing/models.py" afterPath="$PROJECT_DIR$/testing/models.py" />
-      <change beforePath="$PROJECT_DIR$/testing/templates/people.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testing/templates/testing/acceleration.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testing/templates/testing/results.html" afterPath="" />
       <change beforePath="$PROJECT_DIR$/testing/views.py" afterPath="$PROJECT_DIR$/testing/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,8 +33,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testing/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="34" column="17" lean-forward="true" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+            <state relative-caret-position="408">
+              <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -44,7 +45,7 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.virtualenvs/cff/lib/python3.6/site-packages/django/forms/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
+            <state relative-caret-position="2771">
               <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
               <folding />
             </state>
@@ -84,8 +85,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testing/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="126" column="8" lean-forward="true" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="29" />
+            <state relative-caret-position="2057">
+              <caret line="126" column="8" lean-forward="false" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="29" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -96,10 +97,16 @@
       <file leaf-file-name="event.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/templates/testing/event.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="659">
-              <caret line="45" column="72" lean-forward="true" selection-start-line="45" selection-start-column="72" selection-end-line="45" selection-end-column="72" />
+            <state relative-caret-position="356">
+              <caret line="50" column="32" lean-forward="false" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#4;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#5;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,8 +125,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testing/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1133">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="34">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -130,8 +137,8 @@
       <file leaf-file-name="widgets.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.virtualenvs/cff/lib/python3.6/site-packages/django/forms/widgets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-818">
-              <caret line="493" column="37" lean-forward="true" selection-start-line="493" selection-start-column="37" selection-end-line="493" selection-end-column="37" />
+            <state relative-caret-position="8109">
+              <caret line="493" column="37" lean-forward="false" selection-start-line="493" selection-start-column="37" selection-end-line="493" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -205,9 +212,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="777" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -244,6 +250,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -278,8 +286,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -439,7 +445,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521889976080</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="solved problem with testing getting last event (it was an error in getting last element from the table)">
+      <created>1522253466965</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1522253466965</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -448,7 +461,7 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32933334" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32933334" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23466666" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -489,7 +502,8 @@
     <MESSAGE value="New testing form" />
     <MESSAGE value="Add parameters to testing form model and view" />
     <MESSAGE value="Solved problem with driver request for testing. &#10;- Prepopulate driver field with existing drivers&#10;- Requested all parameters&#10;- Display table with existing testing sessions (** will be changed)&#10;&#10;- All implementations are currently working as expected" />
-    <option name="LAST_COMMIT_MESSAGE" value="Solved problem with driver request for testing. &#10;- Prepopulate driver field with existing drivers&#10;- Requested all parameters&#10;- Display table with existing testing sessions (** will be changed)&#10;&#10;- All implementations are currently working as expected" />
+    <MESSAGE value="solved problem with testing getting last event (it was an error in getting last element from the table)" />
+    <option name="LAST_COMMIT_MESSAGE" value="solved problem with testing getting last event (it was an error in getting last element from the table)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -582,6 +596,12 @@
           <caret line="26" column="11" lean-forward="false" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
           <folding>
             <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#4;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -668,6 +688,12 @@
           <caret line="26" column="11" lean-forward="true" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
           <folding>
             <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#4;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -889,7 +915,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="601">
           <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -903,8 +928,8 @@
     </entry>
     <entry file="file://$USER_HOME$/.virtualenvs/cff/lib/python3.6/site-packages/django/forms/widgets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-818">
-          <caret line="493" column="37" lean-forward="true" selection-start-line="493" selection-start-column="37" selection-end-line="493" selection-end-column="37" />
+        <state relative-caret-position="8109">
+          <caret line="493" column="37" lean-forward="false" selection-start-line="493" selection-start-column="37" selection-end-line="493" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -919,8 +944,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1133">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="34">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
@@ -929,7 +954,7 @@
     </entry>
     <entry file="file://$USER_HOME$/.virtualenvs/cff/lib/python3.6/site-packages/django/forms/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
+        <state relative-caret-position="2771">
           <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
           <folding />
         </state>
@@ -937,8 +962,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="126" column="8" lean-forward="true" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="29" />
+        <state relative-caret-position="2057">
+          <caret line="126" column="8" lean-forward="false" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="29" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -947,8 +972,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="34" column="17" lean-forward="true" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+        <state relative-caret-position="408">
+          <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
@@ -957,10 +982,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/templates/testing/event.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
-          <caret line="45" column="72" lean-forward="true" selection-start-line="45" selection-start-column="72" selection-end-line="45" selection-end-column="72" />
+        <state relative-caret-position="356">
+          <caret line="50" column="32" lean-forward="false" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
           <folding>
             <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#4;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
