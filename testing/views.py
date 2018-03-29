@@ -5,7 +5,7 @@ from django.views import generic
 from django_tables2 import RequestConfig
 
 from testing.tables import DriverTable, TestingTable
-from .models import Driver, Testing
+from .models import Driver, Testing, Acceleration
 from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm
 
 
@@ -28,24 +28,8 @@ class New_Testing(generic.TemplateView):
             data = Testing.objects.all()[::-1][0]
             table = TestingTable(Testing.objects.all())
             RequestConfig(request).configure(table)
-            event = data.event
-            if event == "Acceleration":
-                run = AccForm()
-                ref = 'blocks/acceleration_request.html'
-            elif event == "Skid Pad":
-                run = SkForm()
-                ref = 'blocks/skid_pad_request.html'
-            elif event =="Autocross":
-                run = AXForm()
-                ref = 'blocks/autocross_request.html'
-            else:
-                run = EnForm()
-                ref = 'blocks/endurance_request.html'
-            args = {'table': table, 'data': data, 'run': run, 'req': ref}
-            # REDIRECT IS NOW AT AN INCORRECT PAGE!!
-            # USE render! If redirect display of info does not work
+            return redirect("../event", {'data': data, 'table': table})
 
-            return render(request, "testing/event.html", args)
         print(form.errors)
         return render(request, self.template_name, {'form': form})
 
@@ -63,6 +47,7 @@ class new_driver(generic.TemplateView):
         return render(request, self.template_name, args)
 
     def post(self, request):
+        print('POST-testing')
         form = DriverForm(request.POST)
         if form.is_valid():
             form.save()
@@ -86,6 +71,58 @@ def home(request):
     return render(request, 'testing/home.html')
 
 
+# class Acc_view(generic.TemplateView):
+#     print('im here')
+#     model = Acceleration
+#     template_name = 'testing/event.html'
+#
+#     @staticmethod
+#     def post(request):
+#         print('POST-testing')
+#         form = AccForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             print('working')
+#             data = Testing.objects.all()[::-1][0]
+#             table = TestingTable(Testing.objects.all())
+#             RequestConfig(request).configure(table)
+#             run = AccForm()
+#             ref = 'blocks/acceleration_request.html'
+#             args = {'table': table, 'data': data, 'run': run, 'req': ref}
+#             return render("testing/event.html", args)
+#         print(form.errors)
+#         data = Testing.objects.all()[::-1][0]
+#         table = TestingTable(Testing.objects.all())
+#         RequestConfig(request).configure(table)
+#         return redirect("../event", {'data': data, 'table': table})
+
+
+def event(request, data=None, table=None):
+    if data == None:
+        data = Testing.objects.all()[::-1][0]
+    if table == None:
+        table = TestingTable(Testing.objects.all())
+
+    event = data.event
+    if event == "Acceleration":
+        run = AccForm()
+        ref = 'blocks/acceleration_request.html'
+    elif event == "Skid Pad":
+        run = SkForm()
+        ref = 'blocks/skid_pad_request.html'
+    elif event == "Autocross":
+        run = AXForm()
+        ref = 'blocks/autocross_request.html'
+    else:
+        run = EnForm()
+        ref = 'blocks/endurance_request.html'
+    args = {'table': table, 'data': data, 'run': run, 'req': ref}
+    # REDIRECT IS NOW AT AN INCORRECT PAGE!!
+    # USE render! If redirect display of info does not work
+
+    return render(request, "testing/event.html", args)
+
+
 def acceleration(request, data=None, table=None):
     # inherits froms TemplateView class
     if data == None:
@@ -106,11 +143,12 @@ def skid_pad(request, data=None, table=None):
     if table == None:
         table = TestingTable(Testing.objects.all())
     RequestConfig(request).configure(table)
-
-
-
+    run = EnForm()
+    ref = 'blocks/endurance_request.html'
+    args = {'table': table, 'data': data, 'run': run, 'req': ref}
     # USE render! If redirect display of info does not work
-    return render(request, "testing/event.html", args)
+    return redirect("../event", args)
+
 
 def autocross(request, data, table):
     pass

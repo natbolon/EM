@@ -12,5 +12,6 @@ urlpatterns = [
     path('new_driver/', views.new_driver.as_view(), name='new_driver'),
     path('new_testing/', views.New_Testing.as_view(), name='new_testing'),
     path('acceleration/', views.acceleration, name='acceleration'),
-    path('drivers/', views.Drivers, name='drivers')
+    path('drivers/', views.Drivers, name='drivers'),
+    path('event/', views.event, name='event')
 ]

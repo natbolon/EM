@@ -1,5 +1,17 @@
-<div class="row">
-    <p class="span4 col-sm-4" style="font-size: large">Length Lap:</p>
-    <p class="span2 col-sm-5" style="font-size: medium">{{ run.length_lap }}</p>
+<form method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <p class="span4 col-sm-4" style="font-size: large">Length Lap:</p>
+        <p class="span2 col-sm-5" style="font-size: medium">{{ run.length_lap }}</p>
 
-</div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-12 text-right">
+            <button name="Run_End" type="submit" class="btn btn-default preview-add-button">
+                <span class="glyphicon glyphicon-plus"></span> SUBMIT
+            </button>
+        </div>
+    </div>
+
+</form>
