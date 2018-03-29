@@ -110,7 +110,7 @@ class PowertrainParams(models.Model):
 class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
     date = models.DateTimeField(auto_now=True)
     location = models.CharField(max_length=200, default="")
-    event = models.TextField(choices=[('Acceleration', 'Acceleration'), ('SP', 'Skid Pad'),
+    event = models.TextField(choices=[('Acceleration', 'Acceleration'), ('Skid Pad', 'Skid Pad'),
                                       ('Autocross', 'Autocross'), ('Endurance', 'Endurance')],
                              default='Acceleration')
     comments = models.TextField(max_length=20000, default="", blank=True)
@@ -163,6 +163,7 @@ class Autocross(Testing):
 class Endurance(Testing):
     length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
     total_length = 22000
+
 
     # THINK HOW TO HANDLE LAPS. INTENTION: CREATE A VARIABLE (LIST) THAT STORES ALL THE LAP TIMES AND
     # ARISES A WARNING WHEN REACHED THE LAST LAP

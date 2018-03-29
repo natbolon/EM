@@ -6,7 +6,7 @@ from django_tables2 import RequestConfig
 
 from testing.tables import DriverTable, TestingTable
 from .models import Driver, Testing
-from .forms import DriverForm, NewTestingForm, AccForm
+from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm
 
 
 class New_Testing(generic.TemplateView):
@@ -30,11 +30,18 @@ class New_Testing(generic.TemplateView):
             RequestConfig(request).configure(table)
             event = data.event
             if event == "Acceleration":
-                return acceleration(request, data, table)
-            else:
-                print(event)
                 run = AccForm()
-            args = {'table': table, 'data': data, 'run': run}
+                ref = 'blocks/acceleration_request.html'
+            elif event == "Skid Pad":
+                run = SkForm()
+                ref = 'blocks/skid_pad_request.html'
+            elif event =="Autocross":
+                run = AXForm()
+                ref = 'blocks/autocross_request.html'
+            else:
+                run = EnForm()
+                ref = 'blocks/endurance_request.html'
+            args = {'table': table, 'data': data, 'run': run, 'req': ref}
             # REDIRECT IS NOW AT AN INCORRECT PAGE!!
             # USE render! If redirect display of info does not work
 
@@ -87,8 +94,23 @@ def acceleration(request, data=None, table=None):
         table = TestingTable(Testing.objects.all())
     RequestConfig(request).configure(table)
     run = AccForm()
-    args = {'table': table, 'data': data, 'run': run}
-    print('correct path')
+    args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html'}
     # USE render! If redirect display of info does not work
     return render(request, "testing/event.html", args)
 
+
+def skid_pad(request, data=None, table=None):
+    # inherits froms TemplateView class
+    if data == None:
+        data = Testing.objects.all()[::-1][0]
+    if table == None:
+        table = TestingTable(Testing.objects.all())
+    RequestConfig(request).configure(table)
+
+
+
+    # USE render! If redirect display of info does not work
+    return render(request, "testing/event.html", args)
+
+def autocross(request, data, table):
+    pass

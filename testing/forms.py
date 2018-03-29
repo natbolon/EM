@@ -2,7 +2,7 @@ from django import forms
 from django.forms import TextInput
 from django.utils.dateparse import parse_duration
 
-from .models import Driver, Testing, Acceleration
+from .models import Driver, Testing, Acceleration, SkidPad, Autocross, Endurance
 
 
 class DriverForm(forms.ModelForm):
@@ -104,5 +104,56 @@ class AccForm(forms.ModelForm):
         widgets = dict(
             time=forms.TextInput(
                 attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
+            )
+        )
+
+
+class SkForm(forms.ModelForm):
+    class Meta:
+        model = SkidPad
+
+        exclude = ('length_lap', 'total_length')
+
+        widgets = dict(
+            l1_time=forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
+            ),
+            l2_time=forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
+            ),
+            r1_time=forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
+            ),
+            r2_time=forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
+            )
+        )
+
+
+class AXForm(forms.ModelForm):
+    class Meta:
+        model = Autocross
+
+        exclude = ('',)
+
+        widgets = dict(
+            time=forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
+            ),
+            length_lap=forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Meters'}
+            )
+        )
+
+
+class EnForm(forms.ModelForm):
+    class Meta:
+        model = Endurance
+
+        exclude = ('total_length',)
+
+        widgets = dict(
+            length_lap=forms.TextInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Meters'}
             )
         )
