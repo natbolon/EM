@@ -5,7 +5,7 @@ from django.views import generic
 from django_tables2 import RequestConfig
 
 from testing.tables import DriverTable, TestingTable
-from .models import Driver, Testing, Acceleration, SkidPad
+from .models import Driver, Testing, Acceleration, Skid_Pad
 from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm
 
 
@@ -166,7 +166,7 @@ def acceleration(request, data=None, table=None):
 
 
 class SKV(generic.TemplateView):
-    model = SkidPad
+    model = Skid_Pad
     template_name = 'testing/event.html'
 
     def get(self, request, data=None, table=None):
@@ -197,7 +197,7 @@ class SKV(generic.TemplateView):
             form.save()
             run = SkForm()
             args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html'}
-            # USE render! If redirect display of info does not work
+            # USE render! If redirect, display of info does not work
             return render(request, "testing/event.html", args)
 
         if data == None:
@@ -208,7 +208,7 @@ class SKV(generic.TemplateView):
         RequestConfig(request).configure(table)
         run = SkForm()
         args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html'}
-        # USE render! If redirect display of info does not work
+        # USE render! If redirect, display of info does not work
         return render(request, "testing/event.html", args)
     # model = SkidPad
     # template_name = 'testing/event.html'

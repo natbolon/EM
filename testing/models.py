@@ -102,7 +102,7 @@ class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
 
     def __str__(self):
         # return self.time.strftime('%H:%M - %d-%m-%Y')
-        return str(self.id)
+        return str(self.date)
 
     class Meta:
         order_with_respect_to = 'date'
@@ -114,16 +114,12 @@ class Acceleration(models.Model):
     time = models.CharField(max_length=7, default="")
     params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
 
-    # def run(self):
-    #     s, ms = str(self.time).split('.')
-    #     return datetime.timedelta(seconds=s, milliseconds=ms)
-
     def __str__(self):
         return str(self.id)
 
 
-class SkidPad(models.Model):
-    id_sk = models.AutoField(primary_key=True, default=0)
+class Skid_Pad(models.Model):
+    id = models.AutoField(primary_key=True)
     length_lap = 57.33
     total_length = 229.33
     l1_time = models.CharField(max_length=7, default="")
@@ -135,7 +131,6 @@ class SkidPad(models.Model):
     def __str__(self):
         return str(self.id)
 
-    @property
     def time(self):
         return int(self.l1_time) + int(self.l2_time) + int(self.r1_time) + int(self.r2_time)
 
