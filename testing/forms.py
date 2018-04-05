@@ -99,7 +99,8 @@ class AccForm(forms.ModelForm):
     class Meta:
         model = Acceleration
 
-        exclude = ('length',)
+        exclude = ('length', 'params')
+
 
         widgets = dict(
             time=forms.TextInput(
@@ -112,7 +113,7 @@ class SkForm(forms.ModelForm):
     class Meta:
         model = SkidPad
 
-        exclude = ('length_lap', 'total_length')
+        exclude = ('length_lap', 'total_length', 'params')
 
         widgets = dict(
             l1_time=forms.TextInput(

@@ -2,24 +2,6 @@ import datetime
 
 from django.db import models
 
-# each class represents a databased field in the model
-from django.utils.dateparse import parse_duration
-
-
-class Duration(models.Field):
-    def _format_value(self, value):
-        duration = parse_duration(value)
-
-        seconds = duration.seconds
-        microseconds = duration.microseconds
-
-        minutes = seconds // 60
-        seconds = seconds % 60
-
-        minutes = minutes % 60
-
-        return '{:02d}:{:02d}.{:03d}'.format(minutes, seconds, microseconds)
-
 
 class Question(models.Model):
     # Field type: CharField or DateTimeField
@@ -108,6 +90,7 @@ class PowertrainParams(models.Model):
 
 
 class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
+    id = models.AutoField(primary_key=True)
     date = models.DateTimeField(auto_now=True)
     location = models.CharField(max_length=200, default="")
     event = models.TextField(choices=[('Acceleration', 'Acceleration'), ('Skid Pad', 'Skid Pad'),
@@ -115,44 +98,46 @@ class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
                              default='Acceleration')
     comments = models.TextField(max_length=20000, default="", blank=True)
 
-    driver = models.ForeignKey(
-        Driver, related_query_name='driver', on_delete=models.CASCADE
-    )
+    driver = models.ForeignKey(Driver, related_query_name='driver', on_delete=models.CASCADE)
 
     def __str__(self):
         # return self.time.strftime('%H:%M - %d-%m-%Y')
-        return self.date.strftime('%H:%M - %d-%m-%Y')
+        return str(self.id)
 
     class Meta:
         order_with_respect_to = 'date'
 
 
-class Acceleration(Testing):
+class Acceleration(models.Model):
+    id = models.AutoField(primary_key=True)
     length = 75
-    time = models.CharField(max_length=7)
+    time = models.CharField(max_length=7, default="")
+    params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
 
-    def run(self):
-        s, ms = str(self.time).split('.')
-        return datetime.timedelta(seconds=s, milliseconds=ms)
+    # def run(self):
+    #     s, ms = str(self.time).split('.')
+    #     return datetime.timedelta(seconds=s, milliseconds=ms)
 
-    # def __str__(self):
-    #     return '{:02d}.{:03d}'.format(self.run.seconds, self.run.microseconds)
-
-    class Meta(Testing.Meta):
-        pass
+    def __str__(self):
+        return str(self.id)
 
 
-class SkidPad(Testing):
+class SkidPad(models.Model):
+    id_sk = models.AutoField(primary_key=True, default=0)
     length_lap = 57.33
     total_length = 229.33
-    l1_time = models.DurationField()
-    l2_time = models.DurationField()
-    r1_time = models.DurationField()
-    r2_time = models.DurationField()
+    l1_time = models.CharField(max_length=7, default="")
+    l2_time = models.CharField(max_length=7, default="")
+    r1_time = models.CharField(max_length=7, default="")
+    r2_time = models.CharField(max_length=7, default="")
+    params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.id)
 
     @property
     def time(self):
-        return self.l1_time + self.l2_time + self.r1_time + self.r2_time
+        return int(self.l1_time) + int(self.l2_time) + int(self.r1_time) + int(self.r2_time)
 
 
 class Autocross(Testing):
@@ -163,7 +148,6 @@ class Autocross(Testing):
 class Endurance(Testing):
     length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
     total_length = 22000
-
 
     # THINK HOW TO HANDLE LAPS. INTENTION: CREATE A VARIABLE (LIST) THAT STORES ALL THE LAP TIMES AND
     # ARISES A WARNING WHEN REACHED THE LAST LAP

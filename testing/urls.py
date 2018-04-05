@@ -11,7 +11,8 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('new_driver/', views.new_driver.as_view(), name='new_driver'),
     path('new_testing/', views.New_Testing.as_view(), name='new_testing'),
-    path('acceleration/', views.acceleration, name='acceleration'),
+    path('acceleration/', views.AccelerationV.as_view(), name='acceleration'),
     path('drivers/', views.Drivers, name='drivers'),
-    path('event/', views.event, name='event')
+    path('event/', views.event, name='event'),
+    path('skidpad/', views.SKV.as_view(), name='skid_pad')
 ]
