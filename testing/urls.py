@@ -14,5 +14,7 @@ urlpatterns = [
     path('acceleration/', views.AccelerationV.as_view(), name='acceleration'),
     path('drivers/', views.Drivers, name='drivers'),
     path('event/', views.event, name='event'),
-    path('skidpad/', views.SKV.as_view(), name='skid_pad')
+    path('skidpad/', views.SKV.as_view(), name='skid_pad'),
+    path('autocross/', views.AutoXV.as_view(), name='autocross')
+
 ]

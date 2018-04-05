@@ -135,16 +135,21 @@ class Skid_Pad(models.Model):
         return int(self.l1_time) + int(self.l2_time) + int(self.r1_time) + int(self.r2_time)
 
 
-class Autocross(Testing):
+class AutoX(models.Model):
+    id = models.AutoField(primary_key=True)
     length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
-    time = models.DurationField()
+    time = models.CharField(max_length=7, default="")
+    params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.id)
 
 
 class Endurance(Testing):
     length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
     total_length = 22000
 
-    # THINK HOW TO HANDLE LAPS. INTENTION: CREATE A VARIABLE (LIST) THAT STORES ALL THE LAP TIMES AND
+    # THINK ABOUT HOW TO HANDLE LAPS. INTENTION: CREATE A VARIABLE (LIST) THAT STORES ALL THE LAP TIMES AND
     # ARISES A WARNING WHEN REACHED THE LAST LAP
 
     def laps(self):

@@ -2,7 +2,7 @@ from django import forms
 from django.forms import TextInput
 from django.utils.dateparse import parse_duration
 
-from .models import Driver, Testing, Acceleration, Skid_Pad, Autocross, Endurance
+from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance
 
 
 class DriverForm(forms.ModelForm):
@@ -133,7 +133,7 @@ class SkForm(forms.ModelForm):
 
 class AXForm(forms.ModelForm):
     class Meta:
-        model = Autocross
+        model = AutoX
 
         exclude = ('',)
 

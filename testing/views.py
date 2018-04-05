@@ -5,7 +5,7 @@ from django.views import generic
 from django_tables2 import RequestConfig
 
 from testing.tables import DriverTable, TestingTable
-from .models import Driver, Testing, Acceleration, Skid_Pad
+from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX
 from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm
 
 
@@ -31,8 +31,12 @@ class New_Testing(generic.TemplateView):
             if data.event == "Acceleration":
                 return redirect("../acceleration")
 
-            if data.event == "Skid Pad":
+            elif data.event == "Skid Pad":
                 return redirect("../skidpad")
+
+            elif data.event == "Autocross":
+                return redirect("../autocross")
+
             return redirect("../event", {'data': data, 'table': table})
 
         print(form.errors)
@@ -152,19 +156,6 @@ class AccelerationV(generic.TemplateView):
         return render(request, "testing/event.html", args)
 
 
-def acceleration(request, data=None, table=None):
-    # inherits froms TemplateView class
-    if data == None:
-        data = Testing.objects.all()[::-1][0]
-    if table == None:
-        table = TestingTable(Testing.objects.all())
-    RequestConfig(request).configure(table)
-    run = AccForm()
-    args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html'}
-    # USE render! If redirect display of info does not work
-    return render(request, "testing/event.html", args)
-
-
 class SKV(generic.TemplateView):
     model = Skid_Pad
     template_name = 'testing/event.html'
@@ -210,36 +201,50 @@ class SKV(generic.TemplateView):
         args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html'}
         # USE render! If redirect, display of info does not work
         return render(request, "testing/event.html", args)
-    # model = SkidPad
-    # template_name = 'testing/event.html'
-    #
-    # def get(self, request):
-    #     data = Testing.objects.all()[::-1][0]
-    #     table = TestingTable(Testing.objects.all())
-    #     RequestConfig(request).configure(table)
-    #     run = SkForm()
-    #     ref = 'blocks/skid_pad_request.html'
-    #     args = {'table': table, 'data': data, 'run': run, 'req': ref}
-    #     # USE render! If redirect display of info does not work
-    #     return render(request, "testing/event.html", args)
-    #
-    # def post(self, request):
-    #     form = SkForm(request.POST)
-    #     model_instance = form.save(commit=False)
-    #     model_instance.params = Testing.objects.all()[::-1][0]
-    #     if form.is_valid():
-    #         data = Testing.objects.all()[::-1][0]
-    #         table = TestingTable(Testing.objects.all())
-    #         RequestConfig(request).configure(table)
-    #         form.save()
-    #         run = SkForm()
-    #         ref = 'blocks/skid_pad_request.html'
-    #         args = {'table': table, 'data': data, 'run': run, 'req': ref}
-    #         # USE render! If redirect display of info does not work
-    #         return render(request, "testing/event.html", args)
 
 
+class AutoXV(generic.TemplateView):
+    model = AutoX
+    template_name = 'testing/event.html'
 
+    def get(self, request, data=None, table=None):
+        if data == None:
+            data = Testing.objects.all()[::-1][0]
 
-def autocross(request, data, table):
-    pass
+        if table == None:
+            table = TestingTable(Testing.objects.all())
+        RequestConfig(request).configure(table)
+        run = AXForm()
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html'}
+        # USE render! If redirect display of info does not work
+        return render(request, "testing/event.html", args)
+
+    def post(self, request, data=None, table=None):
+        form = AXForm(request.POST)
+        model_instance = form.save(commit=False)
+        model_instance.params = Testing.objects.all()[::-1][0]
+
+        if form.is_valid():
+            form.save(commit=False)
+            if data == None:
+                data = Testing.objects.all()[::-1][0]
+
+            if table == None:
+                table = TestingTable(Testing.objects.all())
+            RequestConfig(request).configure(table)
+            form.save()
+            run = AXForm()
+            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html'}
+            # USE render! If redirect, display of info does not work
+            return render(request, "testing/event.html", args)
+
+        if data == None:
+            data = Testing.objects.all()[::-1][0]
+
+        if table == None:
+            table = TestingTable(Testing.objects.all())
+        RequestConfig(request).configure(table)
+        run = AXForm()
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html'}
+        # USE render! If redirect, display of info does not work
+        return render(request, "testing/event.html", args)
