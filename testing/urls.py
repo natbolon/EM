@@ -15,6 +15,6 @@ urlpatterns = [
     path('drivers/', views.Drivers, name='drivers'),
     path('event/', views.event, name='event'),
     path('skidpad/', views.SKV.as_view(), name='skid_pad'),
-    path('autocross/', views.AutoXV.as_view(), name='autocross')
-
+    path('autocross/', views.AutoXV.as_view(), name='autocross'),
+    path('old_testing/<slug:event>', views.Old_Testing, name='old_testing'),
 ]

@@ -4,8 +4,8 @@ from django.template import loader
 from django.views import generic
 from django_tables2 import RequestConfig
 
-from testing.tables import DriverTable, TestingTable
-from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX
+from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable
+from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance
 from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm
 
 
@@ -74,6 +74,30 @@ def Drivers(request):
     table = DriverTable(Driver.objects.all())
     RequestConfig(request).configure(table)
     return render(request, 'testing/drivers.html', {'table': table})
+
+
+def Old_Testing(request, event):
+    if event == "acceleration":
+        info = Acceleration.objects.all()
+        table = AccelerationTable(info)
+
+    elif event == "skidpad":
+        info = Skid_Pad.objects.all()
+        table = SkidPadTable(info)
+    elif event == "autocross":
+        info = AutoX.objects.all()
+        table = AutoXTable(info)
+    else:
+        info = Endurance.objects.all()
+        table = EnduranceTable(info)
+
+    RequestConfig(request).configure(table)
+    if len(info) != 0:
+        return render(request, 'testing/old_testing.html', {'table': table, 'event': event, 'error': None, 't': 10})
+    else:
+        error = 'OH! It seems you have not done any {} yet!'.format(event)
+        return render(request, 'testing/old_testing.html',
+                      {'table': table, 'event': event, 'error': error, 't': 0})
 
 
 def home(request):
