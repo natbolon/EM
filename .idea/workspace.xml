@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc29bee-ce85-40cb-bf70-e5d4991664ff" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/testing/resources.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/EM/settings.py" afterPath="$PROJECT_DIR$/EM/settings.py" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change beforePath="$PROJECT_DIR$/testing/tables.py" afterPath="$PROJECT_DIR$/testing/tables.py" />
-      <change beforePath="$PROJECT_DIR$/testing/templates/testing/drivers.html" afterPath="$PROJECT_DIR$/testing/templates/testing/drivers.html" />
-      <change beforePath="$PROJECT_DIR$/testing/templates/testing/old_testing.html" afterPath="$PROJECT_DIR$/testing/templates/testing/old_testing.html" />
-      <change beforePath="$PROJECT_DIR$/testing/urls.py" afterPath="$PROJECT_DIR$/testing/urls.py" />
-      <change beforePath="$PROJECT_DIR$/testing/views.py" afterPath="$PROJECT_DIR$/testing/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/testing/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="595">
-              <caret line="152" column="0" lean-forward="true" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+              <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -49,18 +42,32 @@
         <entry file="file://$PROJECT_DIR$/testing/templates/testing/old_testing.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
-              <caret line="51" column="10" lean-forward="true" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="10" />
+              <caret line="51" column="10" lean-forward="false" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tables.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tables.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/tables.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-144">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="221">
+              <caret line="30" column="45" lean-forward="false" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1670">
+              <caret line="130" column="88" lean-forward="false" selection-start-line="130" selection-start-column="88" selection-end-line="130" selection-end-column="88" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -81,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/testing/templates/blocks/acceleration_request.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="14" column="10" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="14" selection-end-column="10" />
+              <caret line="14" column="10" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="14" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -111,20 +118,8 @@
         <entry file="file://$PROJECT_DIR$/testing/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
-              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/testing/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-342">
-              <caret line="130" column="88" lean-forward="false" selection-start-line="130" selection-start-column="88" selection-end-line="130" selection-end-column="88" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -190,13 +185,13 @@
         <option value="$PROJECT_DIR$/testing/admin.py" />
         <option value="$PROJECT_DIR$/testing/models.py" />
         <option value="$PROJECT_DIR$/testing/templates/blocks/nav.html" />
-        <option value="$PROJECT_DIR$/testing/tables.py" />
         <option value="$PROJECT_DIR$/EM/settings.py" />
         <option value="$PROJECT_DIR$/testing/templates/testing/drivers.html" />
         <option value="$PROJECT_DIR$/testing/templates/testing/old_testing.html" />
         <option value="$PROJECT_DIR$/testing/urls.py" />
         <option value="$PROJECT_DIR$/testing/resources.py" />
         <option value="$PROJECT_DIR$/testing/views.py" />
+        <option value="$PROJECT_DIR$/testing/tables.py" />
       </list>
     </option>
   </component>
@@ -516,7 +511,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523889829063</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Allows export to .xls info about: drivers, accelerations, skid pad and autocross">
+      <created>1524329588559</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1524329588559</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -524,10 +526,10 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32933334" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.312" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32933334" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.312" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.312" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1609375" sideWeight="0.49466667" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -598,7 +600,8 @@
     <MESSAGE value="Skid Pad working" />
     <MESSAGE value="Autocross time avaliable for registration" />
     <MESSAGE value="page for viewing old testing sessions. The script is not working" />
-    <option name="LAST_COMMIT_MESSAGE" value="page for viewing old testing sessions. The script is not working" />
+    <MESSAGE value="Allows export to .xls info about: drivers, accelerations, skid pad and autocross" />
+    <option name="LAST_COMMIT_MESSAGE" value="Allows export to .xls info about: drivers, accelerations, skid pad and autocross" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1060,16 +1063,26 @@
     <entry file="file://$PROJECT_DIR$/testing/templates/blocks/acceleration_request.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="10" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="14" selection-end-column="10" />
+          <caret line="14" column="10" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="14" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/urls.py">
+    <entry file="file://$PROJECT_DIR$/testing/templates/testing/old_testing.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state relative-caret-position="408">
+          <caret line="51" column="10" lean-forward="false" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="10" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1083,38 +1096,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/templates/testing/old_testing.html">
+    <entry file="file://$PROJECT_DIR$/testing/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="51" column="10" lean-forward="true" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="10" />
+        <state relative-caret-position="323">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/tables.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-144">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="152" column="0" lean-forward="true" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342">
+        <state relative-caret-position="1670">
           <caret line="130" column="88" lean-forward="false" selection-start-line="130" selection-start-column="88" selection-end-line="130" selection-end-column="88" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/tables.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="30" column="45" lean-forward="false" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
