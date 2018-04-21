@@ -3,7 +3,10 @@ from django.http import HttpResponse, Http404
 from django.template import loader
 from django.views import generic
 from django_tables2 import RequestConfig
+from django_tables2.export import TableExport
+from django_tables2.templatetags.django_tables2 import render_table
 
+from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource
 from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable
 from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance
 from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm
@@ -70,34 +73,84 @@ class new_driver(generic.TemplateView):
         return render(request, self.template_name, {'form': form})
 
 
-def Drivers(request):
-    table = DriverTable(Driver.objects.all())
-    RequestConfig(request).configure(table)
-    return render(request, 'testing/drivers.html', {'table': table})
+class Drivers(generic.TemplateView):
+    model = Driver
+    template_name = 'testing/drivers.html'
+
+    def get(self, request):
+        table = DriverTable(Driver.objects.all())
+        RequestConfig(request).configure(table)
+
+        export_format = request.GET.get('_export', None)
+        if TableExport.is_valid_format(export_format):
+            exporter = TableExport(export_format, table)
+            return exporter.response('table.{}'.format(export_format))
+
+        return render(request, self.template_name, {'table': table})
+
+    def post(self, request):
+        return self.export(request)
+
+    def export(self, request):
+        person_resource = DriverResource()
+        dataset = person_resource.export()
+        response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="drivers.xls"'
+        return response
 
 
-def Old_Testing(request, event):
-    if event == "acceleration":
-        info = Acceleration.objects.all()
-        table = AccelerationTable(info)
+class Old_Testing_Class(generic.TemplateView):
+    template_name = 'testing/old_testing.html'
 
-    elif event == "skidpad":
-        info = Skid_Pad.objects.all()
-        table = SkidPadTable(info)
-    elif event == "autocross":
-        info = AutoX.objects.all()
-        table = AutoXTable(info)
-    else:
-        info = Endurance.objects.all()
-        table = EnduranceTable(info)
+    def get(self, request, *args, **kwargs):
+        event = kwargs['event']
+        model, _, table = self.check_model(event)
 
-    RequestConfig(request).configure(table)
-    if len(info) != 0:
-        return render(request, 'testing/old_testing.html', {'table': table, 'event': event, 'error': None, 't': 10})
-    else:
-        error = 'OH! It seems you have not done any {} yet!'.format(event)
-        return render(request, 'testing/old_testing.html',
-                      {'table': table, 'event': event, 'error': error, 't': 0})
+        RequestConfig(request).configure(table)
+        return render(request, self.template_name, {'table': table, 'event': event})
+
+    def post(self, request, **kwargs):
+        event = kwargs['event']
+        model, model_rs, table = self.check_model(event)
+        return self.export(event, model_rs)
+
+    def check_model(self, event):
+        if event == "acceleration":
+            model = Acceleration
+            model_rs = AccelerationResource()
+            info = Acceleration.objects.all()
+            table = AccelerationTable(info)
+
+        elif event == "skidpad":
+            model = Skid_Pad
+            model_rs = SkidPadResource()
+            info = Skid_Pad.objects.all()
+            table = SkidPadTable(info)
+
+        elif event == "autocross":
+            model = AutoX
+            model_rs = AutoXResource()
+            info = AutoX.objects.all()
+            table = AutoXTable(info)
+
+        else:
+            model = Endurance
+            model_rs = AccelerationResource()
+            info = Endurance.objects.all()
+            table = EnduranceTable(info)
+
+        return model, model_rs, table
+
+    def export(self, event, model_rs):
+        model_resource = model_rs
+        dataset = model_resource.export()
+        response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+        filename = '{}.xls'.format(event)
+        response['Content-Disposition'] = 'attachment; filename={fn}'.format(fn=filename)
+        return response
+
+
+
 
 
 def home(request):

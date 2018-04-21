@@ -1,4 +1,6 @@
 from django_tables2 import tables
+from django_tables2.export import TableExport
+
 from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance
 
 
@@ -7,6 +9,7 @@ class DriverTable(tables.Table):
         model = Driver
         template_name = 'django_tables2/bootstrap-responsive.html'
         sequence = ('name', 'surname', 'email', 'weight', 'height', 'gender', 'birthday', 'creation')
+
 
 
 class TestingTable(tables.Table):
