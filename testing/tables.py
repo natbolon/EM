@@ -20,6 +20,8 @@ class TestingTable(tables.Table):
 
 class AccelerationTable(tables.Table):
     driver = Column(accessor='params.driver')
+    date = Column(accessor='params.date')
+    place = Column(accessor='params.location')
 
     class Meta:
         model = Acceleration
@@ -29,19 +31,31 @@ class AccelerationTable(tables.Table):
 
 class SkidPadTable(tables.Table):
     driver = Column(accessor='params.driver')
+    date = Column(accessor='params.date')
+    place = Column(accessor='params.location')
+
     class Meta:
         model = Skid_Pad
         template_name = 'django_tables2/bootstrap-responsive.html'
-        sequence = ('id', 'l1_time', 'l2_time', 'r1_time', 'r2_time')
+        exclude = ('params',)
+        #sequence = ('id', 'l1_time', 'l2_time', 'r1_time', 'r2_time')
 
 
 class AutoXTable(tables.Table):
+    driver = Column(accessor='params.driver')
+    date = Column(accessor='params.date')
+    place = Column(accessor='params.location')
+
     class Meta:
         model = AutoX
         template_name = 'django_tables2/bootstrap-responsive.html'
 
 
 class EnduranceTable(tables.Table):
+    driver = Column(accessor='params.driver')
+    date = Column(accessor='params.date')
+    place = Column(accessor='params.location')
+
     class Meta:
         model = Endurance
         template_name = 'django_tables2/bootstrap-responsive.html'
