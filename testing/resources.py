@@ -8,8 +8,12 @@ class DriverResource(resources.ModelResource):
 
 
 class AccelerationResource(resources.ModelResource):
+
     class Meta:
         model = Acceleration
+        widgets = {
+            'params.date': {'format': '%d.%m.%Y'},
+        }
 
 
 class AutoXResource(resources.ModelResource):
@@ -20,3 +24,7 @@ class AutoXResource(resources.ModelResource):
 class SkidPadResource(resources.ModelResource):
     class Meta:
         model = Skid_Pad
+
+class TestingResource(resources.ModelResource):
+    class Meta:
+        model = Testing

@@ -1,3 +1,4 @@
+from django.forms import model_to_dict
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 from django.template import loader
@@ -6,7 +7,7 @@ from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
 from django_tables2.templatetags.django_tables2 import render_table
 
-from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource
+from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource, TestingResource
 from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable
 from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance
 from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm
@@ -17,7 +18,11 @@ class New_Testing(generic.TemplateView):
     template_name = 'testing/new_testing.html'
 
     def get(self, request):
-        form = NewTestingForm()
+        if len(Testing.objects.all()) == 0:
+            form = NewTestingForm()
+        else:
+            data = Testing.objects.all()[::-1][0]
+            form = NewTestingForm(initial=model_to_dict(data))
         form.fields['driver'].queryset = Driver.objects.all()
         posts = Testing.objects.all()
 
@@ -133,11 +138,17 @@ class Old_Testing_Class(generic.TemplateView):
             info = AutoX.objects.all()
             table = AutoXTable(info)
 
-        else:
+        elif event == "endurance":
             model = Endurance
             model_rs = AccelerationResource()
             info = Endurance.objects.all()
             table = EnduranceTable(info)
+
+        else:
+            model = Testing
+            model_rs = TestingResource()
+            info = Testing.objects.all()
+            table = TestingTable(info)
 
         return model, model_rs, table
 

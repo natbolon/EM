@@ -1,16 +1,15 @@
-<form method="POST">
-    {% csrf_token %}
-    <div class="row">
-        <p class="span4 col-sm-4" style="font-size: large">Time:</p>
-        <p class="span2 col-sm-5" style="font-size: medium">{{ run.time }}</p>
+<div class="row">
+    <p class="span4 col-sm-4">Time:</p>
+    <p class="span2 col-sm-5">{{ run.time }}</p>
+    <p class="span4 col-sm-4">Result1:</p>
+    <p class="span2 col-sm-5">{{ run.temp_inv_ini }}</p>
 
-    </div>
+</div>
 
-    <div class="form-group">
-        <div class="col-sm-12 text-right">
-            <button name="Acc" type="submit" class="btn btn-default preview-add-button">
-                <span class="glyphicon glyphicon-plus"></span> SUBMIT
-            </button>
-        </div>
+<div class="form-group">
+    <div class="col-sm-12 text-right">
+        <button name="Acc" type="submit" class="btn btn-default preview-add-button">
+            <span class="glyphicon glyphicon-plus"></span> SUBMIT
+        </button>
     </div>
-</form>
+</div>

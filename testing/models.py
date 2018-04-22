@@ -105,36 +105,46 @@ class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
         return str(self.date)
 
     class Meta:
-        order_with_respect_to = 'date'
+        order_with_respect_to = 'id'
 
 
 class Results(models.Model):
+
     temp_inv_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
     temp_inv_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
     temp_bat_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
     temp_bat_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_front_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_front_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_rear_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_rear_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
+    temp_pneu_FL_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
+    temp_pneu_FR_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
+    temp_pneu_RL_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
+    temp_pneu_RR_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
+    temp_pneu_FL_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
+    temp_pneu_FR_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
+    temp_pneu_RL_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
+    temp_pneu_RR_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
     temp_motor_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
     temp_motor_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
     volt_min_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
     volt_min_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
     comments = models.TextField(max_length=20000, default="", blank=True)
 
+    class Meta:
+        abstract=True
 
-class Acceleration(models.Model):
+
+
+class Acceleration(Results):
     id = models.AutoField(primary_key=True)
     length = 75
     time = models.CharField(max_length=7, default="")
+    date = models.DateTimeField(auto_now=True)
     params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.id)
 
 
-class Skid_Pad(models.Model):
+class Skid_Pad(Results):
     id = models.AutoField(primary_key=True)
     length_lap = 57.33
     total_length = 229.33
@@ -142,6 +152,7 @@ class Skid_Pad(models.Model):
     l2_time = models.CharField(max_length=7, default="")
     r1_time = models.CharField(max_length=7, default="")
     r2_time = models.CharField(max_length=7, default="")
+    date = models.DateTimeField(auto_now=True)
     params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
@@ -151,22 +162,27 @@ class Skid_Pad(models.Model):
         return int(self.l1_time) + int(self.l2_time) + int(self.r1_time) + int(self.r2_time)
 
 
-class AutoX(models.Model):
+class AutoX(Results):
     id = models.AutoField(primary_key=True)
     length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
     time = models.CharField(max_length=7, default="")
+    date = models.DateTimeField(auto_now=True)
     params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.id)
 
 
-class Endurance(Testing):
+class Endurance(Results):
+    id = models.AutoField(primary_key=True)
     length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
     total_length = 22000
 
     # THINK ABOUT HOW TO HANDLE LAPS. INTENTION: CREATE A VARIABLE (LIST) THAT STORES ALL THE LAP TIMES AND
     # ARISES A WARNING WHEN REACHED THE LAST LAP
+
+    def __str__(self):
+        return str(self.id)
 
     def laps(self):
         return int(self.total_length / self.length_lap)
