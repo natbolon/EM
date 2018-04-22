@@ -1,0 +1,112 @@
+<h3>Current Set up</h3>
+<p>Configuration for current testing session:</p>
+<div class="row">
+
+
+    <div>
+        <a class="col-sm-3" data-toggle="collapse" href="#dyn"
+           style="font-size: large; color: #000; font-weight: bold">
+            Dynamic parameters</a>
+    </div>
+
+    <div id="dyn" class="container collapse col-sm-12" style="padding: 10px">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+
+                    <th>Front Camber</th>
+                    <th>Rear Camber</th>
+                    <th>Front Toe</th>
+                    <th>Rear Toe</th>
+                    <th>Front Pressure</th>
+                    <th>Rear Pressure</th>
+                    <th>Front Weight</th>
+                    <th>Rear Weight</th>
+                    <th>Front Height</th>
+                    <th>Rear Height</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ data.front_camber }}</td>
+                    <td>{{ data.rear_camber }}</td>
+                    <td>{{ data.front_toe }}</td>
+                    <td>{{ data.rear_toe }}</td>
+                    <td>{{ data.front_pressure }}</td>
+                    <td>{{ data.rear_pressure }}</td>
+                    <td>{{ data.front_weight }}</td>
+                    <td>{{ data.rear_weight }}</td>
+                    <td>{{ data.front_height }}</td>
+                    <td>{{ data.rear_height }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <a class="col-sm-3" data-toggle="collapse" href="#aer"
+           style="font-size: large; color: #000; font-weight: bold">
+            Aerodynamic parameters</a>
+    </div>
+    <div id="aer" class="container collapse col-sm-12" style="padding: 10px">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>DRS enabled</th>
+                    <th>Front Wing Flap1</th>
+                    <th>Front Wing Flap2</th>
+                    <th>Rear Wing Flap1</th>
+                    <th>Rear Wing Flap2</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ data.drs }}</td>
+                    <td>{{ data.fw_flap1_degrees }}</td>
+                    <td>{{ data.fw_flap2_degrees }}</td>
+                    <td>{{ data.rw_flap1_degrees }}</td>
+                    <td>{{ data.rw_flap2_degrees }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <a class="col-sm-3" data-toggle="collapse" href="#pwt"
+           style="font-size: large; color: #000; font-weight: bold">
+            Powertrain parameters</a>
+    </div>
+    <div id="pwt" class="container collapse col-sm-12" style="padding: 10px">
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Mode</th>
+                    <th>Continuous current</th>
+                    <th>Peak current</th>
+                    <th>KP Current</th>
+                    <th>TI Current</th>
+                    <th>KP Speed</th>
+                    <th>TI Speed</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ data.mode }}</td>
+                    <td>{{ data.cont_current_p }}</td>
+                    <td>{{ data.peak_current_p }}</td>
+                    <td>{{ data.kp_current }}</td>
+                    <td>{{ data.ti_current }}</td>
+                    <td>{{ data.kp_speed }}</td>
+                    <td>{{ data.ti_speed }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

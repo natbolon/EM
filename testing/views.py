@@ -10,7 +10,7 @@ from django_tables2.templatetags.django_tables2 import render_table
 from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource, TestingResource
 from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable
 from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance
-from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm
+from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm, ResultsForm
 
 
 class New_Testing(generic.TemplateView):
@@ -161,9 +161,6 @@ class Old_Testing_Class(generic.TemplateView):
         return response
 
 
-
-
-
 def home(request):
     return render(request, 'testing/home.html')
 
@@ -187,9 +184,10 @@ def event(request, data=None, table=None):
     else:
         run = EnForm()
         ref = 'blocks/endurance_request.html'
-    args = {'table': table, 'data': data, 'run': run, 'req': ref}
-    # REDIRECT IS NOW AT AN INCORRECT PAGE!!
-    # USE render! If redirect display of info does not work
+
+    results = ResultsForm()
+
+    args = {'table': table, 'data': data, 'run': run, 'req': ref, 'res': results}
 
     return render(request, "testing/event.html", args)
 
@@ -209,7 +207,7 @@ class AccelerationV(generic.TemplateView):
             table = TestingTable(Testing.objects.all())
         RequestConfig(request).configure(table)
         run = AccForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html'}
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html', 'res': ResultsForm()}
         # USE render! If redirect display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -228,7 +226,7 @@ class AccelerationV(generic.TemplateView):
             RequestConfig(request).configure(table)
             form.save()
             run = AccForm()
-            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html'}
+            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html', 'res': ResultsForm()}
             # USE render! If redirect display of info does not work
             return render(request, "testing/event.html", args)
 
@@ -239,7 +237,7 @@ class AccelerationV(generic.TemplateView):
             table = TestingTable(Testing.objects.all())
         RequestConfig(request).configure(table)
         run = AccForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html'}
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html', 'res': ResultsForm()}
         # USE render! If redirect display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -256,7 +254,7 @@ class SKV(generic.TemplateView):
             table = TestingTable(Testing.objects.all())
         RequestConfig(request).configure(table)
         run = SkForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html'}
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html', 'res': ResultsForm()}
         # USE render! If redirect display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -275,7 +273,8 @@ class SKV(generic.TemplateView):
             RequestConfig(request).configure(table)
             form.save()
             run = SkForm()
-            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html'}
+            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html',
+                    'res': ResultsForm()}
             # USE render! If redirect, display of info does not work
             return render(request, "testing/event.html", args)
 
@@ -286,7 +285,8 @@ class SKV(generic.TemplateView):
             table = TestingTable(Testing.objects.all())
         RequestConfig(request).configure(table)
         run = SkForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html'}
+        results = ResultsForm()
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html', 'res': results}
         # USE render! If redirect, display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -303,7 +303,8 @@ class AutoXV(generic.TemplateView):
             table = TestingTable(Testing.objects.all())
         RequestConfig(request).configure(table)
         run = AXForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html'}
+        results = ResultsForm()
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html', 'res': results}
         # USE render! If redirect display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -322,7 +323,8 @@ class AutoXV(generic.TemplateView):
             RequestConfig(request).configure(table)
             form.save()
             run = AXForm()
-            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html'}
+            results = ResultsForm()
+            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html', 'res': results}
             # USE render! If redirect, display of info does not work
             return render(request, "testing/event.html", args)
 
@@ -333,6 +335,7 @@ class AutoXV(generic.TemplateView):
             table = TestingTable(Testing.objects.all())
         RequestConfig(request).configure(table)
         run = AXForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html'}
+        results = ResultsForm
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html', 'res': results}
         # USE render! If redirect, display of info does not work
         return render(request, "testing/event.html", args)

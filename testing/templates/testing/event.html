@@ -8,6 +8,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Testing session</title>
+    <style>
+        #info1 {
+            font-weight: bold;
+            padding-left: 15px;
+        }
+
+        #info2 {
+            padding-right: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -19,25 +29,25 @@
 <form method="post">
     {% csrf_token %}
 
-    <div class="container col-sm-5" style="padding-left: 20px; font-size: medium">
+    <div class="container col-sm-4" style="padding-left: 20px; font-size:15px">
 
         <div class="row">
-            <h3 class="col-sm-6">Testing session #{{ data.id }}</h3>
+            <h3 class="col-sm-8" style="font-weight: bold">Testing session #{{ data.id }}</h3>
         </div>
 
         <div class="row">
-            <p class="col-sm-4">Location:</p>
-            <p class="col-sm-6" style="font-size: medium">{{ data.location }}</p>
+            <p class="col-sm-4" id="info1">Location:</p>
+            <p id="info2">{{ data.location }}</p>
         </div>
 
         <div class="row">
-            <p class="col-sm-4">Driver:</p>
-            <p class="col-sm-6" style="font-size: medium">{{ data.driver.name }} {{ data.driver.surname }}</p>
+            <p class="col-sm-4" id="info1">Driver:</p>
+            <p id="info2">{{ data.driver.name }} {{ data.driver.surname }}</p>
         </div>
 
         <div class="row">
-            <p class="col-sm-4">Date:</p>
-            <p class="col-sm-6" style="font-size: medium">{{ data.date }}</p>
+            <p class="col-sm-4" id="info1">Date:</p>
+            <p id="info2">{{ data.date }}</p>
         </div>
 
         <div class="row">
@@ -55,117 +65,23 @@
     </div>
 
 
-    <div id=Setup class="container col-sm-7" style="padding-right: 20px">
-        <h3>Set up</h3>
-        <p>Configuration for current testing session:</p>
-        <div class="row">
-            <a class="col-sm-4" data-toggle="collapse" href="#dyn"
-               style="font-size: large; color: #000; font-weight: bold">
-                Dynamic parameters</a>
+    <div id=Results class="container col-sm-8" style="padding: 10px">
+        {% include 'blocks/results.html' %}
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-4">
+            <p></p>
         </div>
-
-        <div id="dyn" class="container collapse col-sm-12" style="padding-right: 20px">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-
-                        <th>Front Camber</th>
-                        <th>Rear Camber</th>
-                        <th>Front Toe</th>
-                        <th>Rear Toe</th>
-                        <th>Front Pressure</th>
-                        <th>Rear Pressure</th>
-                        <th>Front Weight</th>
-                        <th>Rear Weight</th>
-                        <th>Front Height</th>
-                        <th>Rear Height</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{ data.front_camber }}</td>
-                        <td>{{ data.rear_camber }}</td>
-                        <td>{{ data.front_toe }}</td>
-                        <td>{{ data.rear_toe }}</td>
-                        <td>{{ data.front_pressure }}</td>
-                        <td>{{ data.rear_pressure }}</td>
-                        <td>{{ data.front_weight }}</td>
-                        <td>{{ data.rear_weight }}</td>
-                        <td>{{ data.front_height }}</td>
-                        <td>{{ data.rear_height }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="col-sm-8" style="padding-right: 10px">
+            <button name="SUBMIT" type="submit" class="btn btn-default preview-add-button">
+                <span class="glyphicon glyphicon-plus"></span> SUBMIT
+            </button>
         </div>
+    </div>
 
-        <div class="row">
-            <a class="col-sm-4" data-toggle="collapse" href="#aer"
-               style="font-size: large; color: #000; font-weight: bold">
-                Aerodynamic parameters</a>
-        </div>
-        <div id="aer" class="container collapse col-sm-12" style="padding-right: 20px">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>DRS enabled</th>
-                        <th>Front Wing Flap1</th>
-                        <th>Front Wing Flap2</th>
-                        <th>Rear Wing Flap1</th>
-                        <th>Rear Wing Flap2</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{ data.drs }}</td>
-                        <td>{{ data.fw_flap1_degrees }}</td>
-                        <td>{{ data.fw_flap2_degrees }}</td>
-                        <td>{{ data.rw_flap1_degrees }}</td>
-                        <td>{{ data.rw_flap2_degrees }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="row">
-            <a class="col-sm-4" data-toggle="collapse" href="#pwt"
-               style="font-size: large; color: #000; font-weight: bold">
-                Powertrain parameters</a>
-        </div>
-        <div id="pwt" class="container collapse col-sm-12" style="padding-right: 20px">
-
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Mode</th>
-                        <th>Continuous current</th>
-                        <th>Peak current</th>
-                        <th>KP Current</th>
-                        <th>TI Current</th>
-                        <th>KP Speed</th>
-                        <th>TI Speed</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{ data.mode }}</td>
-                        <td>{{ data.cont_current_p }}</td>
-                        <td>{{ data.peak_current_p }}</td>
-                        <td>{{ data.kp_current }}</td>
-                        <td>{{ data.ti_current }}</td>
-                        <td>{{ data.kp_speed }}</td>
-                        <td>{{ data.ti_speed }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
+    <div id=Setup class="container col-sm-12" style="padding: 20px">
+        {% include 'blocks/setup.html' %}
     </div>
 </form>
 

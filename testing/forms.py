@@ -2,7 +2,7 @@ from django import forms
 from django.forms import TextInput
 from django.utils.dateparse import parse_duration
 
-from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance
+from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, Results
 
 
 class DriverForm(forms.ModelForm):
@@ -42,7 +42,7 @@ class NewTestingForm(forms.ModelForm):
             driver=forms.Select(
                 attrs={'class': 'form-control col-md-6', 'placeholder': "Select driver"}),
             location=forms.TextInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'IN4 Montmelo'}),
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'IN4 Montmeló'}),
             event=forms.Select(),
             mode=forms.NumberInput(
                 attrs={'class': 'form-control col-md-6'}),
@@ -95,21 +95,48 @@ class NewTestingForm(forms.ModelForm):
         exclude = ("",)
 
 
-class AccForm(forms.ModelForm):
+class ResultsForm(forms.ModelForm):
+    class Meta:
+        model = Results
+        exclude = ("",)
+
+        widgets = dict(
+            temp_inv_ini=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_inv_end=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_bat_ini=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_bat_end=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_pneu_FL_ini=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_pneu_FR_ini=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_pneu_RL_ini=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_pneu_RR_ini=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_pneu_FL_end=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_pneu_FR_end=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_pneu_RL_end=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_pneu_RR_end=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_motor_ini=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            temp_motor_end=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '25.2'}),
+            volt_min_ini=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '5920'}),
+            volt_min_end=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': '5230'}),
+            comments=forms.TextInput(attrs={'class': 'form-control col-md-6', 'placeholder': '...'})
+        )
+
+        abstract = True
+
+
+class AccForm(ResultsForm):
     class Meta:
         model = Acceleration
 
         exclude = ('length', 'params')
 
-
         widgets = dict(
             time=forms.TextInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
-            )
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}),
+
         )
 
 
-class SkForm(forms.ModelForm):
+class SkForm(ResultsForm):
     class Meta:
         model = Skid_Pad
 
@@ -131,7 +158,7 @@ class SkForm(forms.ModelForm):
         )
 
 
-class AXForm(forms.ModelForm):
+class AXForm(ResultsForm):
     class Meta:
         model = AutoX
 
@@ -147,7 +174,7 @@ class AXForm(forms.ModelForm):
         )
 
 
-class EnForm(forms.ModelForm):
+class EnForm(ResultsForm):
     class Meta:
         model = Endurance
 

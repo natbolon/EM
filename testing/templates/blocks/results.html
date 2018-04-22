@@ -1,18 +1,79 @@
+<h3 style="font-weight: bold">Impact on the vehicle</h3>
+
 <div class="row">
-    <p class="span4 col-sm-4">Time Left 1:</p>
-    <p class="span2 col-sm-5">{{ run.l1_time }}</p>
-    <p class="span4 col-sm-4">Time Left 2:</p>
-    <p class="span2 col-sm-5">{{ run.l2_time }}</p>
-    <p class="span4 col-sm-4">Time Right 1:</p>
-    <p class="span2 col-sm-5">{{ run.r1_time }}</p>
-    <p class="span4 col-sm-4">Time Right 2:</p>
-    <p class="span2 col-sm-5">{{ run.r2_time }}</p>
+    <a class="col-sm-8" data-toggle="collapse" href="#setdown_dyn"
+       style="font-size: large; color: #000; font-weight: bold">
+        Impact on Dynamic parameters</a>
+</div>
+<div id="setdown_dyn" class="collapse">
+    <div class="row">
+        <p class="span4 col-sm-4">Initial Temperature FL Pneumatic[ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_pneu_FL_ini }}</p>
+        <p class="span4 col-sm-4">Final Temperature FL Pneumatic[ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_pneu_FL_end }}</p>
+    </div>
+
+    <div class="row">
+        <p class="span4 col-sm-4">Initial Temperature FR Pneumatic[ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_pneu_FR_ini }}</p>
+        <p class="span4 col-sm-4">Final Temperature FR Pneumatic[ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_pneu_FR_end }}</p>
+    </div>
+
+    <div class="row">
+        <p class="span4 col-sm-4">Initial Temperature RL Pneumatic[ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_pneu_RL_ini }}</p>
+        <p class="span4 col-sm-4">Final Temperature RL Pneumatic[ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_pneu_RL_end }}</p>
+    </div>
+
+    <div class="row">
+        <p class="span4 col-sm-4">Initial Temperature RR Pneumatic[ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_pneu_RR_ini }}</p>
+        <p class="span4 col-sm-4">Final Temperature RR Pneumatic[ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_pneu_RR_end }}</p>
+    </div>
+
 </div>
 
-<div class="form-group">
-    <div class="col-sm-12 text-right">
-        <button name="SP" type="submit" class="btn btn-default preview-add-button">
-            <span class="glyphicon glyphicon-plus"></span> SUBMIT
-        </button>
-    </div>
+<div class="row">
+    <a class="col-sm-8" data-toggle="collapse" href="#setdown_pwt"
+       style="font-size: large; color: #000; font-weight: bold">
+        Impact on Powertain parameters</a>
 </div>
+
+<div id="setdown_pwt" class="collapse">
+    <div class="row">
+        <p class="span4 col-sm-4">Initial Temperature Inverter [ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_inv_ini }}</p>
+        <p class="span4 col-sm-4">Final Temperature Inverter [ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_inv_end }}</p>
+    </div>
+
+    <div class="row">
+        <p class="span4 col-sm-4">Initial Temperature Motor [ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_motor_ini }}</p>
+        <p class="span4 col-sm-4">Final Temperature Motor [ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_motor_end }}</p>
+    </div>
+
+    <div class="row">
+        <p class="span4 col-sm-4">Initial Temperature Battery [ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_bat_ini }}</p>
+        <p class="span4 col-sm-4">Final Temperature Battery [ºC]:</p>
+        <p class="span2 col-sm-2">{{ res.temp_bat_end }}</p>
+    </div>
+
+    <div class="row">
+        <p class="span4 col-sm-4">Initial Minimum Voltage [mV]:</p>
+        <p class="span2 col-sm-2">{{ res.volt_min_ini }}</p>
+        <p class="span4 col-sm-4">Final Minimum Voltage [mV]:</p>
+        <p class="span2 col-sm-2">{{ res.volt_min_end }}</p>
+    </div>
+
+</div>
+
+
+
+
+

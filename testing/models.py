@@ -109,28 +109,26 @@ class Testing(DynamicParams, AerodynamicsParams, PowertrainParams):
 
 
 class Results(models.Model):
-
-    temp_inv_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_inv_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_bat_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_bat_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_FL_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_FR_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_RL_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_RR_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_FL_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_FR_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_RL_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_pneu_RR_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_motor_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    temp_motor_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    volt_min_ini = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
-    volt_min_end = models.DecimalField(decimal_places=0, max_digits=3, default=0, blank=True, null=True)
+    temp_inv_ini = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_inv_end = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_bat_ini = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_bat_end = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_pneu_FL_ini = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_pneu_FR_ini = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_pneu_RL_ini = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_pneu_RR_ini = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_pneu_FL_end = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_pneu_FR_end = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_pneu_RL_end = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_pneu_RR_end = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_motor_ini = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    temp_motor_end = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    volt_min_ini = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
+    volt_min_end = models.DecimalField(decimal_places=0, max_digits=3, default='', blank=True, null=True)
     comments = models.TextField(max_length=20000, default="", blank=True)
 
     class Meta:
-        abstract=True
-
+        abstract = True
 
 
 class Acceleration(Results):
