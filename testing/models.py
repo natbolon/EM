@@ -13,7 +13,6 @@ class Driver(models.Model):
     birthday = models.DateField()
     creation = models.DateTimeField(auto_now=True)
 
-
     def __str__(self):
         return self.name
 
@@ -118,7 +117,7 @@ class Results(models.Model):
 class Acceleration(Results):
     id = models.AutoField(primary_key=True)
     length = 75
-    time = models.CharField(max_length=7, default="")
+    time = models.DecimalField(decimal_places=3, max_digits=5, default='')
     date = models.DateTimeField(auto_now=True)
     params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
 
@@ -139,9 +138,10 @@ class Skid_Pad(Results):
 
     def __str__(self):
         return str(self.id)
+
     @property
     def time(self):
-        return float(self.l2_time) + float(self.r2_time)
+        return float("{0:.3f}".format(float(self.l2_time) + float(self.r2_time)))
 
 
 class AutoX(Results):

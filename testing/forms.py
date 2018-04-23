@@ -130,8 +130,7 @@ class AccForm(ResultsForm):
         exclude = ('length', 'params')
 
         widgets = dict(
-            time=forms.TextInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}),
+            time=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}),
 
         )
 

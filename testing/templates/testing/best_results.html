@@ -1,0 +1,156 @@
+{% load render_table from django_tables2 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>BEST PARAMETERS</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- Page header-->
+<div>
+
+    {% include 'blocks/nav.html' %}
+    <h1 align="center">CAT10e</h1>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10" align="center" style="padding-left: 40px; padding-right: 40px">
+
+
+
+
+            <div>
+                <a class="col-sm-12" data-toggle="collapse" href="#dyn"
+                   style="font-size: large; color: #000; font-weight: bold">
+                    Dynamic parameters</a>
+            </div>
+
+            <div id="dyn" class="container collapse col-sm-12" style="padding: 10px">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+
+                            <th>Front Camber</th>
+                            <th>Rear Camber</th>
+                            <th>Front Toe</th>
+                            <th>Rear Toe</th>
+                            <th>Front Pressure</th>
+                            <th>Rear Pressure</th>
+                            <th>Front Weight</th>
+                            <th>Rear Weight</th>
+                            <th>Front Height</th>
+                            <th>Rear Height</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ data.params.front_camber }}</td>
+                            <td>{{ data.params.rear_camber }}</td>
+                            <td>{{ data.params.front_toe }}</td>
+                            <td>{{ data.params.rear_toe }}</td>
+                            <td>{{ data.params.front_pressure }}</td>
+                            <td>{{ data.params.rear_pressure }}</td>
+                            <td>{{ data.params.front_weight }}</td>
+                            <td>{{ data.params.rear_weight }}</td>
+                            <td>{{ data.params.front_height }}</td>
+                            <td>{{ data.params.rear_height }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <a class="col-sm-12" data-toggle="collapse" href="#aer"
+                   style="font-size: large; color: #000; font-weight: bold">
+                    Aerodynamic parameters</a>
+            </div>
+            <div id="aer" class="container collapse col-sm-12" style="padding: 10px">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>DRS enabled</th>
+                            <th>Front Wing Flap1</th>
+                            <th>Front Wing Flap2</th>
+                            <th>Rear Wing Flap1</th>
+                            <th>Rear Wing Flap2</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ data.drs }}</td>
+                            <td>{{ data.params.fw_flap1_degrees }}</td>
+                            <td>{{ data.params.fw_flap2_degrees }}</td>
+                            <td>{{ data.params.rw_flap1_degrees }}</td>
+                            <td>{{ data.params.rw_flap2_degrees }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <a class="col-sm-12" data-toggle="collapse" href="#pwt"
+                   style="font-size: large; color: #000; font-weight: bold">
+                    Powertrain parameters</a>
+            </div>
+            <div id="pwt" class="container collapse col-sm-12" style="padding: 10px">
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Mode</th>
+                            <th>Continuous current</th>
+                            <th>Peak current</th>
+                            <th>KP Current</th>
+                            <th>TI Current</th>
+                            <th>KP Speed</th>
+                            <th>TI Speed</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ data.params.mode }}</td>
+                            <td>{{ data.params.cont_current_p }}</td>
+                            <td>{{ data.params.peak_current_p }}</td>
+                            <td>{{ data.params.kp_current }}</td>
+                            <td>{{ data.params.ti_current }}</td>
+                            <td>{{ data.params.kp_speed }}</td>
+                            <td>{{ data.params.ti_speed }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+    </div>
+    <div class="col-sm-1"></div>
+
+
+{#    <div class="form-group">#}
+{#        <div class="col-sm-11 text-right">#}
+{#            <button name="export_csv" type="submit" class="btn btn-default preview-add-button">#}
+{#                <span class="glyphicon"></span> EXPORT AS XLS#}
+{#            </button>#}
+{#        </div>#}
+{#        <div class="col-sm-2"></div>#}
+{#    </div>#}
+</form>
+
+</body>
+</html>

@@ -1,5 +1,7 @@
 import math
-from django.db.models import Avg, Min
+
+import datetime
+from django.db.models import Avg, Min, Max
 from django.forms import model_to_dict
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
@@ -117,8 +119,12 @@ class Old_Testing_Class(generic.TemplateView):
 
     def post(self, request, **kwargs):
         event = kwargs['event']
-        model, model_rs, table = self.check_model(event)
-        return self.export(event, model_rs)
+
+        if 'export_csv' in request.POST:
+            model, model_rs, table = self.check_model(event)
+            return self.export(event, model_rs)
+        else:
+            return best_results(request, event)
 
     def check_model(self, event):
         if event == "acceleration":
@@ -397,3 +403,42 @@ def statistics_sk(obj):
     return list((float("{0:.3f}".format(avg)), float("{0:.3f}".format(minimum)), runs,
                  float("{0:.3f}".format(avg_l2)), float("{0:.3f}".format(min_l2)),
                  float("{0:.3f}".format(avg_r2)), float("{0:.3f}".format(min_r2))))
+
+
+def best_results(request, event):
+    if event == "skidpad":
+        stats = statistics_sk(Skid_Pad.objects.all())
+        runs = stats[2]
+        if runs == 0:
+            pass
+        else:
+            min_l = stats[4]
+            min_r = stats[6]
+            min_time1 = Skid_Pad.objects.filter(l2_time=min_l)[0]
+            min_time2 = Skid_Pad.objects.filter(r2_time=min_r)[0]
+            if min_time1.time < min_time2.time:
+                data = min_time1
+            else:
+                data = min_time2
+
+            return render(request, 'testing/best_results.html', {'data': data, })
+
+    else:
+        if event == "acceleration":
+            objs = Acceleration.objects
+
+        elif event == "autocross":
+            objs = AutoX.objects
+
+        else:
+            objs = Endurance.objects
+
+        stats = statistics(objs.all())
+        runs = stats[2]
+        if runs == 0:
+            return redirect('old_testing/{}'.format(event))
+        else:
+            min_time = stats[1]
+            data = objs.filter(time=min_time)[0]
+
+            return render(request, 'testing/best_results.html', {'data': data, })
