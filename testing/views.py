@@ -1,3 +1,5 @@
+import math
+from django.db.models import Avg, Min
 from django.forms import model_to_dict
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
@@ -5,7 +7,6 @@ from django.template import loader
 from django.views import generic
 from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
-from django_tables2.templatetags.django_tables2 import render_table
 
 from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource, TestingResource
 from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable
@@ -45,7 +46,7 @@ class New_Testing(generic.TemplateView):
             elif data.event == "Autocross":
                 return redirect("../autocross")
 
-            return redirect("../event", {'data': data, 'table': table})
+            return redirect("../event")
 
         print(form.errors)
         return render(request, self.template_name, {'form': form})
@@ -86,7 +87,7 @@ class Drivers(generic.TemplateView):
         table = DriverTable(Driver.objects.all())
         RequestConfig(request).configure(table)
 
-        export_format = request.GET.get('_export', None)
+        export_format = request.GET.get('_export', )
         if TableExport.is_valid_format(export_format):
             exporter = TableExport(export_format, table)
             return exporter.response('table.{}'.format(export_format))
@@ -165,23 +166,19 @@ def home(request):
     return render(request, 'testing/home.html')
 
 
-def event(request, data=None, table=None):
-    if data == None:
-        data = Testing.objects.all()[::-1][0]
-    if table == None:
-        table = TestingTable(Testing.objects.all())
-
+def event(request):
+    data = Testing.objects.all()[::-1][0]
     event = data.event
+
     if event == "Acceleration":
-        run = AccForm()
-        ref = 'blocks/acceleration_request.html'
+        return redirect('../acceleration')
     elif event == "Skid Pad":
-        run = SkForm()
-        ref = 'blocks/skid_pad_request.html'
+        return redirect('../skidpad')
     elif event == "Autocross":
-        run = AXForm()
-        ref = 'blocks/autocross_request.html'
+        return redirect('../autocross')
     else:
+
+        table = TestingTable(Testing.objects.all())
         run = EnForm()
         ref = 'blocks/endurance_request.html'
 
@@ -197,47 +194,51 @@ class AccelerationV(generic.TemplateView):
     template_name = 'testing/event.html'
 
     def get(self, request, data=None, table=None):
-        form = AccForm()
-        # form.fields['params'].queryset = Testing.objects.all()[::-1][0]
 
-        if data == None:
-            data = Testing.objects.all()[::-1][0]
+        obj = Testing.objects.filter(event="Acceleration")
+        if not obj:
+            return redirect('../new_testing')
 
-        if table == None:
-            table = TestingTable(Testing.objects.all())
+        data = obj[::-1][0]
+        table = TestingTable(obj)
         RequestConfig(request).configure(table)
         run = AccForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html', 'res': ResultsForm()}
+        stat = statistics(Acceleration.objects.all())
+        stat_view = 'blocks/statistics.html'
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html',
+                'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
         # USE render! If redirect display of info does not work
         return render(request, "testing/event.html", args)
 
-    def post(self, request, data=None, table=None):
+    def post(self, request):
         form = AccForm(request.POST)
         model_instance = form.save(commit=False)
         model_instance.params = Testing.objects.all()[::-1][0]
 
         if form.is_valid():
             form.save(commit=False)
-            if data == None:
-                data = Testing.objects.all()[::-1][0]
-
-            if table == None:
-                table = TestingTable(Testing.objects.all())
+            obj = Testing.objects.filter(event="Acceleration")
+            data = obj[::-1][0]
+            table = TestingTable(obj)
             RequestConfig(request).configure(table)
             form.save()
             run = AccForm()
-            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html', 'res': ResultsForm()}
+            stat = statistics(Acceleration.objects.all())
+            stat_view = 'blocks/statistics.html'
+            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html',
+                    'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
             # USE render! If redirect display of info does not work
             return render(request, "testing/event.html", args)
 
-        if data == None:
-            data = Testing.objects.all()[::-1][0]
-
-        if table == None:
-            table = TestingTable(Testing.objects.all())
+        obj = Testing.objects.filter(event="Acceleration")
+        data = obj[::-1][0]
+        table = TestingTable(obj)
         RequestConfig(request).configure(table)
         run = AccForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html', 'res': ResultsForm()}
+        stat = statistics(Acceleration.objects.all())
+        stat_view = 'blocks/statistics.html'
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/acceleration_request.html',
+                'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
         # USE render! If redirect display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -246,15 +247,20 @@ class SKV(generic.TemplateView):
     model = Skid_Pad
     template_name = 'testing/event.html'
 
-    def get(self, request, data=None, table=None):
-        if data == None:
-            data = Testing.objects.all()[::-1][0]
+    def get(self, request):
 
-        if table == None:
-            table = TestingTable(Testing.objects.all())
+        obj = Testing.objects.filter(event="Skid Pad")
+        if not obj:
+            return redirect('../new_testing')
+        data = obj[::-1][0]
+        table = TestingTable(obj)
+
         RequestConfig(request).configure(table)
         run = SkForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html', 'res': ResultsForm()}
+        stat = statistics_sk(Skid_Pad.objects.all())
+        stat_view = 'blocks/statistics_sk.html'
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html',
+                'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
         # USE render! If redirect display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -265,28 +271,34 @@ class SKV(generic.TemplateView):
 
         if form.is_valid():
             form.save(commit=False)
-            if data == None:
-                data = Testing.objects.all()[::-1][0]
-
-            if table == None:
-                table = TestingTable(Testing.objects.all())
+            obj = Testing.objects.filter(event="Skid Pad")
+            if not obj:
+                return redirect('../new_testing')
+            data = obj[::-1][0]
+            table = TestingTable(obj)
             RequestConfig(request).configure(table)
             form.save()
             run = SkForm()
+
+            stat = statistics_sk(Skid_Pad.objects.all())
+            stat_view = 'blocks/statistics_sk.html'
             args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html',
-                    'res': ResultsForm()}
+                    'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
             # USE render! If redirect, display of info does not work
             return render(request, "testing/event.html", args)
 
-        if data == None:
-            data = Testing.objects.all()[::-1][0]
+        obj = Testing.objects.filter(event="Skid Pad")
+        if not obj:
+            return redirect('../new_testing')
+        data = obj[::-1][0]
+        table = TestingTable(obj)
 
-        if table == None:
-            table = TestingTable(Testing.objects.all())
         RequestConfig(request).configure(table)
         run = SkForm()
-        results = ResultsForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html', 'res': results}
+        stat = statistics_sk(Skid_Pad.objects.all())
+        stat_view = 'blocks/statistics_sk.html'
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/skid_pad_request.html',
+                'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
         # USE render! If redirect, display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -295,16 +307,20 @@ class AutoXV(generic.TemplateView):
     model = AutoX
     template_name = 'testing/event.html'
 
-    def get(self, request, data=None, table=None):
-        if data == None:
-            data = Testing.objects.all()[::-1][0]
+    def get(self, request, **kwargs):
+        obj = Testing.objects.filter(event="Autocross")
+        if not obj:
+            return redirect('../new_testing')
+        data = obj[::-1][0]
+        table = TestingTable(obj)
 
-        if table == None:
-            table = TestingTable(Testing.objects.all())
         RequestConfig(request).configure(table)
         run = AXForm()
         results = ResultsForm()
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html', 'res': results}
+        stat = statistics(AutoX.objects.all())
+        stat_view = 'blocks/statistics.html'
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html',
+                'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
         # USE render! If redirect display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -315,27 +331,69 @@ class AutoXV(generic.TemplateView):
 
         if form.is_valid():
             form.save(commit=False)
-            if data == None:
-                data = Testing.objects.all()[::-1][0]
-
-            if table == None:
-                table = TestingTable(Testing.objects.all())
+            obj = Testing.objects.filter(event="Autocross")
+            if not obj:
+                return redirect('../new_testing')
+            data = obj[::-1][0]
+            table = TestingTable(obj)
             RequestConfig(request).configure(table)
             form.save()
             run = AXForm()
             results = ResultsForm()
-            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html', 'res': results}
+            stat = statistics(AutoX.objects.all())
+            stat_view = 'blocks/statistics.html'
+            args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html',
+                    'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
             # USE render! If redirect, display of info does not work
             return render(request, "testing/event.html", args)
 
-        if data == None:
-            data = Testing.objects.all()[::-1][0]
-
-        if table == None:
-            table = TestingTable(Testing.objects.all())
+        obj = Testing.objects.filter(event="Autocross")
+        if not obj:
+            return redirect('../new_testing')
+        data = obj[::-1][0]
+        table = TestingTable(obj)
         RequestConfig(request).configure(table)
         run = AXForm()
         results = ResultsForm
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html', 'res': results}
+        stat = statistics(AutoX.objects.all())
+        stat_view = 'blocks/statistics.html'
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html',
+                'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
         # USE render! If redirect, display of info does not work
         return render(request, "testing/event.html", args)
+
+
+def statistics(obj):
+    if not obj:
+        avg = '-'
+        min = '-'
+        runs = 0
+        return list((avg, min, runs))
+
+    min = float(obj.aggregate(Min('time'))['time__min'])
+    avg = float(obj.aggregate(Avg('time'))['time__avg'])
+
+    min = float("{0:.2f}".format(min))
+    avg = float("{0:.2f}".format(avg))
+    runs = obj.count()
+    return list((avg, min, runs))
+
+
+def statistics_sk(obj):
+    if not obj:
+        return list(('-', '-', 0, '-', '-', '-', '-'))
+
+    min_l2 = float(obj.aggregate(Min('l2_time'))['l2_time__min'])
+    min_r2 = float(obj.aggregate(Min('r2_time'))['r2_time__min'])
+    min_time1 = Skid_Pad.objects.filter(l2_time=min_l2)[0].time
+    min_time2 = Skid_Pad.objects.filter(r2_time=min_r2)[0].time
+    minimum = min(min_time1, min_time2)
+
+    avg_l2 = float(obj.aggregate(Avg('l2_time'))['l2_time__avg'])
+    avg_r2 = float(obj.aggregate(Avg('r2_time'))['r2_time__avg'])
+    avg = (avg_l2 + avg_r2)
+
+    runs = obj.count()
+    return list((float("{0:.3f}".format(avg)), float("{0:.3f}".format(minimum)), runs,
+                 float("{0:.3f}".format(avg_l2)), float("{0:.3f}".format(min_l2)),
+                 float("{0:.3f}".format(avg_r2)), float("{0:.3f}".format(min_r2))))

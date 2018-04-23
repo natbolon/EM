@@ -143,18 +143,10 @@ class SkForm(ResultsForm):
         exclude = ('length_lap', 'total_length', 'params')
 
         widgets = dict(
-            l1_time=forms.TextInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
-            ),
-            l2_time=forms.TextInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
-            ),
-            r1_time=forms.TextInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
-            ),
-            r2_time=forms.TextInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
-            )
+            l1_time=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}),
+            l2_time=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}),
+            r1_time=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}),
+            r2_time=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'})
         )
 
 
@@ -165,10 +157,8 @@ class AXForm(ResultsForm):
         exclude = ('',)
 
         widgets = dict(
-            time=forms.TextInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}
-            ),
-            length_lap=forms.TextInput(
+            time=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': 'SSSS.MMM'}),
+            length_lap=forms.NumberInput(
                 attrs={'class': 'form-control col-md-6', 'placeholder': 'Meters'}
             )
         )

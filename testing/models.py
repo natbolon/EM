@@ -3,16 +3,6 @@ import datetime
 from django.db import models
 
 
-class Question(models.Model):
-    # Field type: CharField or DateTimeField
-    # each field name is the one appearing as a column name and the one used for referecing it in the code
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-
-    def __str__(self):
-        return self.question_text
-
-
 class Driver(models.Model):
     name = models.CharField(max_length=200, default="")
     surname = models.CharField(max_length=200, default="")
@@ -23,6 +13,7 @@ class Driver(models.Model):
     birthday = models.DateField()
     creation = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return self.name
 
@@ -31,13 +22,6 @@ class Driver(models.Model):
 
     class Meta:
         ordering = ['name']
-
-    @property
-    def compute_age(self):
-        delta = datetime.date.today() - self.birthday
-        return int(delta.days / 365)
-
-    age = compute_age
 
 
 class DynamicParams(models.Model):
@@ -146,24 +130,24 @@ class Skid_Pad(Results):
     id = models.AutoField(primary_key=True)
     length_lap = 57.33
     total_length = 229.33
-    l1_time = models.CharField(max_length=7, default="")
-    l2_time = models.CharField(max_length=7, default="")
-    r1_time = models.CharField(max_length=7, default="")
-    r2_time = models.CharField(max_length=7, default="")
+    l1_time = models.DecimalField(decimal_places=3, max_digits=5, default='')
+    l2_time = models.DecimalField(decimal_places=3, max_digits=5, default='')
+    r1_time = models.DecimalField(decimal_places=3, max_digits=5, default='')
+    r2_time = models.DecimalField(decimal_places=3, max_digits=5, default='')
     date = models.DateTimeField(auto_now=True)
     params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.id)
-
+    @property
     def time(self):
-        return int(self.l1_time) + int(self.l2_time) + int(self.r1_time) + int(self.r2_time)
+        return float(self.l2_time) + float(self.r2_time)
 
 
 class AutoX(Results):
     id = models.AutoField(primary_key=True)
     length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
-    time = models.CharField(max_length=7, default="")
+    time = models.DecimalField(decimal_places=3, max_digits=7, default='')
     date = models.DateTimeField(auto_now=True)
     params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)
 

@@ -39,11 +39,12 @@ class SkidPadTable(tables.Table):
     driver_ = Column(accessor='params.driver.surname')
     date = Column(accessor='date')
     place = Column(accessor='params.location')
+    time = Column(accessor='time', verbose_name='Total time')
 
     class Meta:
         model = Skid_Pad
         template_name = 'django_tables2/bootstrap-responsive.html'
-        fields = ('id','l1_time', 'l2_time', 'r1_time', 'r2_time', 'date', 'setup', 'driver', 'driver_', 'place')
+        fields = ('id','l1_time', 'l2_time', 'r1_time', 'r2_time', 'time', 'date', 'setup', 'driver', 'driver_', 'place')
 
 
 class AutoXTable(tables.Table):
