@@ -369,6 +369,41 @@ class AutoXV(generic.TemplateView):
         return render(request, "testing/event.html", args)
 
 
+class EnduranceV(generic.TemplateView):
+    model = Endurance
+    template_name = 'testing/event.html'
+
+    def get(self, request, **kwargs):
+        obj = Testing.objects.filter(event="Endurance")
+        if not obj:
+            return redirect('../new_testing')
+        data = obj[::-1][0]
+
+        table = TestingTable(obj)
+        RequestConfig(request).configure(table)
+
+        run = EnForm()
+        results = ResultsForm()
+        stat = statistics()
+        stat_view = 'blocks/statistics.html'
+        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/endurance_request.html',
+                'res': results, 'stat': stat, 'stat_view': stat_view}
+        # USE render! If redirect display of info does not work
+        return render(request, "testing/event.html", args)
+
+    def post(self, request, **kwargs):
+        form = EnForm(request.POST)
+        model_instance = form.save(commit=False)
+        model_instance.setup_ini = Testing.objects.all()[::-1][0]
+
+        if form.is_valid():
+            form.save(commit=False)
+            obj = Testing.objects.filter(event="Autocross")
+            if not obj:
+                return redirect('../new_testing')
+
+
+
 def statistics(obj):
     if not obj:
         avg = '-'
@@ -379,8 +414,8 @@ def statistics(obj):
     min = float(obj.aggregate(Min('time'))['time__min'])
     avg = float(obj.aggregate(Avg('time'))['time__avg'])
 
-    min = float("{0:.2f}".format(min))
-    avg = float("{0:.2f}".format(avg))
+    min = float("{0:.3f}".format(min))
+    avg = float("{0:.3f}".format(avg))
     runs = obj.count()
     return list((avg, min, runs))
 
@@ -434,11 +469,13 @@ def best_results(request, event):
             objs = Endurance.objects
 
         stats = statistics(objs.all())
-        runs = stats[2]
-        if runs == 0:
-            return redirect('old_testing/{}'.format(event))
+        if stats[2] == 0:
+            #Redirects to creating a new testign session as there are no results about it. 
+            return redirect('../{}'.format(event))
         else:
             min_time = stats[1]
             data = objs.filter(time=min_time)[0]
 
             return render(request, 'testing/best_results.html', {'data': data, })
+
+

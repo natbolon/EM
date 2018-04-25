@@ -155,16 +155,23 @@ class AutoX(Results):
         return str(self.id)
 
 
-class Endurance(Results):
+class Lap_time(Results):
     id = models.AutoField(primary_key=True)
-    length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
-    total_length = 22000
-
-    # THINK ABOUT HOW TO HANDLE LAPS. INTENTION: CREATE A VARIABLE (LIST) THAT STORES ALL THE LAP TIMES AND
-    # ARISES A WARNING WHEN REACHED THE LAST LAP
+    time = models.DecimalField(decimal_places=3, max_digits=6, default="")
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.id)
 
-    def laps(self):
-        return int(self.total_length / self.length_lap)
+
+class Endurance(models.Model):
+    id = models.AutoField(primary_key=True)
+    length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
+    time_lap = models.ManyToManyField(Lap_time)
+
+    setup_ini = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True, related_name='setup_ini')
+    setup_mid = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True, related_name='setup_mid')
+
+
+    def __str__(self):
+        return str(self.id)

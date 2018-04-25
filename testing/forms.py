@@ -163,14 +163,14 @@ class AXForm(ResultsForm):
         )
 
 
-class EnForm(ResultsForm):
+class EnForm(forms.ModelForm):
     class Meta:
         model = Endurance
 
-        exclude = ('total_length',)
+        exclude = ("",)
 
         widgets = dict(
-            length_lap=forms.TextInput(
+            length_lap=forms.NumberInput(
                 attrs={'class': 'form-control col-md-6', 'placeholder': 'Meters'}
             )
         )
