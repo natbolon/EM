@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc29bee-ce85-40cb-bf70-e5d4991664ff" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/testing/templates/blocks/new_testing_form.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/testing/templates/endurance/endurance.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/testing/templates/endurance/length_request.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/testing/templates/endurance/nothing.html" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testing/forms.py" afterPath="$PROJECT_DIR$/testing/forms.py" />
-      <change beforePath="$PROJECT_DIR$/testing/models.py" afterPath="$PROJECT_DIR$/testing/models.py" />
-      <change beforePath="$PROJECT_DIR$/testing/templates/blocks/endurance_request.html" afterPath="$PROJECT_DIR$/testing/templates/endurance/endurance_request.html" />
-      <change beforePath="$PROJECT_DIR$/testing/templates/testing/new_testing.html" afterPath="$PROJECT_DIR$/testing/templates/testing/new_testing.html" />
-      <change beforePath="$PROJECT_DIR$/testing/urls.py" afterPath="$PROJECT_DIR$/testing/urls.py" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change beforePath="$PROJECT_DIR$/testing/tables.py" afterPath="$PROJECT_DIR$/testing/tables.py" />
       <change beforePath="$PROJECT_DIR$/testing/views.py" afterPath="$PROJECT_DIR$/testing/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,8 +31,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-378">
-              <caret line="422" column="51" lean-forward="false" selection-start-line="422" selection-start-column="51" selection-end-line="422" selection-end-column="51" />
+            <state relative-caret-position="349">
+              <caret line="423" column="0" lean-forward="true" selection-start-line="423" selection-start-column="0" selection-end-line="423" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -82,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/testing/templates/testing/event.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="435">
-              <caret line="91" column="14" lean-forward="true" selection-start-line="69" selection-start-column="8" selection-end-line="91" selection-end-column="14" />
+              <caret line="91" column="14" lean-forward="false" selection-start-line="69" selection-start-column="8" selection-end-line="91" selection-end-column="14" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -108,28 +100,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testing/forms.py">
+      <file leaf-file-name="tables.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing/tables.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="158" column="0" lean-forward="false" selection-start-line="158" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="endurance.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testing/templates/endurance/endurance.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="64" column="27" lean-forward="false" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="378">
+              <caret line="68" column="38" lean-forward="false" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -137,8 +113,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testing/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="169" column="4" lean-forward="true" selection-start-line="169" selection-start-column="4" selection-end-line="169" selection-end-column="15" />
+            <state relative-caret-position="244">
+              <caret line="169" column="4" lean-forward="false" selection-start-line="169" selection-start-column="4" selection-end-line="169" selection-end-column="15" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -206,7 +182,6 @@
         <option value="$PROJECT_DIR$/testing/templates/testing/drivers.html" />
         <option value="$PROJECT_DIR$/testing/templates/blocks/statistics_sk.html" />
         <option value="$PROJECT_DIR$/testing/templates/blocks/statistics.html" />
-        <option value="$PROJECT_DIR$/testing/tables.py" />
         <option value="$PROJECT_DIR$/testing/templates/testing/old_testing.html" />
         <option value="$PROJECT_DIR$/EM/urls.py" />
         <option value="$PROJECT_DIR$/testing/templates/blocks/nav.html" />
@@ -222,6 +197,7 @@
         <option value="$PROJECT_DIR$/testing/templates/endurance/endurance.html" />
         <option value="$PROJECT_DIR$/testing/templates/testing/new_testing.html" />
         <option value="$PROJECT_DIR$/testing/templates/blocks/new_testing_form.html" />
+        <option value="$PROJECT_DIR$/testing/tables.py" />
         <option value="$PROJECT_DIR$/testing/views.py" />
       </list>
     </option>
@@ -299,27 +275,6 @@
               <item name="EM" type="462c0819:PsiDirectoryNode" />
               <item name="testing" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EM" type="462c0819:PsiDirectoryNode" />
-              <item name="testing" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="blocks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EM" type="462c0819:PsiDirectoryNode" />
-              <item name="testing" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="endurance" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EM" type="462c0819:PsiDirectoryNode" />
-              <item name="testing" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="testing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -613,7 +568,21 @@
       <option name="project" value="LOCAL" />
       <updated>1524668845820</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Endurance laps Registration">
+      <created>1525011276509</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1525011276509</updated>
+    </task>
+    <task id="LOCAL-00033" summary="solved error with setup_mid">
+      <created>1525011747482</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1525011747482</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -673,8 +642,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Basic new testing form + redirect to table of results" />
-    <MESSAGE value="New classes + changes in new_testing" />
     <MESSAGE value="Working drivers form with calendar widget.&#10;&#10;Changes in new testing model, form and pageview." />
     <MESSAGE value="changes in app name" />
     <MESSAGE value="New testing form" />
@@ -698,7 +665,9 @@
     <MESSAGE value="corrected functions + add statistics" />
     <MESSAGE value="add best parameters" />
     <MESSAGE value="Add Endurance model, Lap model and part of endurnace view. Needs to be completed!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Endurance model, Lap model and part of endurnace view. Needs to be completed!" />
+    <MESSAGE value="Endurance laps Registration" />
+    <MESSAGE value="solved error with setup_mid" />
+    <option name="LAST_COMMIT_MESSAGE" value="solved error with setup_mid" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -730,33 +699,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/testing/views.py</url>
-          <line>516</line>
+          <line>518</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/testing/views.py</url>
-          <line>540</line>
+          <line>542</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/testing/views.py</url>
-          <line>554</line>
+          <line>556</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/testing/views.py</url>
-          <line>549</line>
+          <line>551</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/testing/views.py</url>
-          <line>464</line>
+          <line>467</line>
           <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/testing/views.py</url>
-          <line>413</line>
-          <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -766,7 +730,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="75" />
+      <option name="time" value="78" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Python.DjangoServer">
@@ -1115,14 +1079,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/tables.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="41" column="60" lean-forward="false" selection-start-line="41" selection-start-column="60" selection-end-line="41" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testing/templates/blocks/autocross_request.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1177,16 +1133,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="169" column="4" lean-forward="true" selection-start-line="169" selection-start-column="4" selection-end-line="169" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testing/templates/endurance/endurance_request.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1198,7 +1144,7 @@
     <entry file="file://$PROJECT_DIR$/testing/templates/testing/event.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
-          <caret line="91" column="14" lean-forward="true" selection-start-line="69" selection-start-column="8" selection-end-line="91" selection-end-column="14" />
+          <caret line="91" column="14" lean-forward="false" selection-start-line="69" selection-start-column="8" selection-end-line="91" selection-end-column="14" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1237,10 +1183,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testing/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="169" column="4" lean-forward="false" selection-start-line="169" selection-start-column="4" selection-end-line="169" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/tables.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="68" column="38" lean-forward="false" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/testing/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-378">
-          <caret line="422" column="51" lean-forward="false" selection-start-line="422" selection-start-column="51" selection-end-line="422" selection-end-column="51" />
+        <state relative-caret-position="349">
+          <caret line="423" column="0" lean-forward="true" selection-start-line="423" selection-start-column="0" selection-end-line="423" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

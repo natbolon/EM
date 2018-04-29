@@ -61,11 +61,12 @@ class AutoXTable(tables.Table):
 
 
 class EnduranceTable(tables.Table):
-    setup = Column(accessor='params.id', verbose_name='Setup')
-    driver = Column(accessor='params.driver')
-    driver_ = Column(accessor='params.driver.surname')
-    date = Column(accessor='params.date')
-    place = Column(accessor='params.location')
+    setup_ini = Column(accessor='setup_ini.id', verbose_name='Setup')
+    setup_mid = Column(accessor='setup_mid.id', verbose_name='Setup')
+    driver_1 = Column(accessor='setup_ini.driver')
+    driver_2 = Column(accessor='setup_mid.driver')
+    date = Column(accessor='setup_ini.date')
+    place = Column(accessor='setup_ini.location')
 
     class Meta:
         model = Endurance

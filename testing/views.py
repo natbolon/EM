@@ -415,13 +415,15 @@ class EnduranceV(generic.TemplateView):
                 end_form.save()
 
             instance = Endurance.objects.all()[::-1][0]
-            instance.__setattr__('setup_mid', data)
-            instance.save()
+
 
             obj = Testing.objects.filter(event="Endurance")
             data = obj[::-1][0]
             table = TestingTable(obj)
             RequestConfig(request).configure(table)
+
+            instance.__setattr__('setup_mid', data)
+            instance.save()
 
             run = LapTimeForm()
             info_req = "endurance/endurance_request.html"
