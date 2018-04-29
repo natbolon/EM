@@ -168,7 +168,7 @@ class Endurance(models.Model):
     id = models.AutoField(primary_key=True)
     length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
     number_laps = models.DecimalField(decimal_places=0, max_digits=3, default=11)
-    time_lap = models.ManyToManyField(Lap_time)
+    time_lap = models.ManyToManyField(Lap_time, related_name='endurance')
 
     setup_ini = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True, related_name='setup_ini')
     setup_mid = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True, related_name='setup_mid')
@@ -176,3 +176,8 @@ class Endurance(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    def total_time(self):
+        times = Lap_time.objects.filter('endurance__id' == self.id)
+
+        return sum(times.time)

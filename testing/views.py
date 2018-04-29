@@ -10,8 +10,10 @@ from django.views import generic
 from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
 
-from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource, TestingResource
-from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable
+from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource, TestingResource, \
+    EnduranceResource, LapsResource
+from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable, \
+    LapTable
 from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, Lap_time
 from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, ResultsForm, Lap, LapTimeForm
 
@@ -116,9 +118,12 @@ class Old_Testing_Class(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         event = kwargs['event']
         model, _, table = self.check_model(event)
+        button = 'blocks/best_conf.html'
+        if event not in ['acceleration', 'skidpad', 'autocross']:
+            button = 'endurance/nothing.html'
 
         RequestConfig(request).configure(table)
-        return render(request, self.template_name, {'table': table, 'event': event})
+        return render(request, self.template_name, {'table': table, 'event': event, 'button': button})
 
     def post(self, request, **kwargs):
         event = kwargs['event']
@@ -150,9 +155,15 @@ class Old_Testing_Class(generic.TemplateView):
 
         elif event == "endurance":
             model = Endurance
-            model_rs = AccelerationResource()
+            model_rs = EnduranceResource()
             info = Endurance.objects.all()
             table = EnduranceTable(info)
+
+        elif event == "laps":
+            model = Lap_time
+            model_rs = LapsResource()
+            info = Lap_time.objects.all()
+            table = LapTable(info)
 
         else:
             model = Testing
@@ -416,7 +427,6 @@ class EnduranceV(generic.TemplateView):
 
             instance = Endurance.objects.all()[::-1][0]
 
-
             obj = Testing.objects.filter(event="Endurance")
             data = obj[::-1][0]
             table = TestingTable(obj)
@@ -469,7 +479,7 @@ def create_lap(request, data, table):
                 form_setup = NewTestingForm(initial=model_to_dict(data))
                 form_setup.fields['driver'].queryset = Driver.objects.all()
 
-                stat = statistics(Lap_time.objects.all())
+                stat = statistics(Lap_time.objects.filter(endurance__id=endurance.id))
                 stat_view = 'blocks/statistics.html'
 
                 args = {'table': table, 'data': data, 'run': None, 'info_req': 'endurance/nothing.html',
@@ -487,7 +497,7 @@ def create_lap(request, data, table):
             run = LapTimeForm()
             info_req = "endurance/endurance_request.html"
 
-            stat = statistics(Lap_time.objects.all())
+            stat = statistics(Lap_time.objects.filter(endurance__id=endurance.id))
             stat_view = 'blocks/statistics.html'
             args = {'table': table, 'data': data, 'run': run, 'info_req': info_req,
                     'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view, 'res_view': 'blocks/results.html'}

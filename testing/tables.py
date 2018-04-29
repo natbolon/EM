@@ -1,7 +1,7 @@
 from django_tables2 import tables, Column
 from django_tables2.export import TableExport
 
-from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance
+from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, Lap_time
 
 
 class DriverTable(tables.Table):
@@ -17,6 +17,13 @@ class TestingTable(tables.Table):
         template_name = 'django_tables2/bootstrap-responsive.html'
         sequence = ('id', '...')
 
+
+class LapTable(tables.Table):
+
+    class Meta:
+        model = Lap_time
+        template_name = 'django_tables2/bootstrap-responsive.html'
+        fields = ('id', 'time', 'driver')
 
 class AccelerationTable(tables.Table):
     setup = Column(accessor='params.id', verbose_name='Setup')
@@ -61,12 +68,13 @@ class AutoXTable(tables.Table):
 
 
 class EnduranceTable(tables.Table):
-    setup_ini = Column(accessor='setup_ini.id', verbose_name='Setup')
-    setup_mid = Column(accessor='setup_mid.id', verbose_name='Setup')
-    driver_1 = Column(accessor='setup_ini.driver')
-    driver_2 = Column(accessor='setup_mid.driver')
+    setup_ini = Column(accessor='setup_ini.id', verbose_name='First Driver Setup')
+    setup_mid = Column(accessor='setup_mid.id', verbose_name='Second Driver Setup')
+    driver_1 = Column(accessor='setup_ini.driver', verbose_name='First Driver')
+    driver_2 = Column(accessor='setup_mid.driver', verbose_name='Second Driver')
     date = Column(accessor='setup_ini.date')
     place = Column(accessor='setup_ini.location')
+    total_time = Column(accessor='total_time')
 
     class Meta:
         model = Endurance
