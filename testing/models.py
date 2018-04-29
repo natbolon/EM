@@ -167,6 +167,7 @@ class Lap_time(Results):
 class Endurance(models.Model):
     id = models.AutoField(primary_key=True)
     length_lap = models.DecimalField(decimal_places=2, max_digits=6, default=100)
+    number_laps = models.DecimalField(decimal_places=0, max_digits=3, default=11)
     time_lap = models.ManyToManyField(Lap_time)
 
     setup_ini = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True, related_name='setup_ini')

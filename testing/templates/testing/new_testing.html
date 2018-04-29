@@ -23,6 +23,7 @@
         <div class="col-sm-3" style="background-color: #FFFFFF"></div>
         <div class="col-sm-6" style="background-color: #FFFFFF">
             <h2>Register a new testing session:</h2>
+
             <div class="panel panel-default">
                 <div class="panel-body form-horizontal payment-form"
                      style="background-color: #d5eef3">
@@ -276,7 +277,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
-                            <button type="submit" class="btn btn-default preview-add-button">
+                            <button name="SUBMIT_SETUP" type="submit" class="btn btn-default preview-add-button">
                                 <span class="glyphicon glyphicon-plus"></span> SUBMIT
                             </button>
                         </div>
@@ -285,28 +286,13 @@
 
                 </div>
             </div>
+
             <!-- / panel preview -->
         </div>
     </form>
 
 </div>
 <div class="col-sm-2"></div>
-{% comment %}<!-- This part is not working as the POST must be done before the table is avaliable so it can render it! -->
-<div class="form-group">
-    <div class="col-sm-8 text-left">
-        <p>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                    aria-expanded="false" aria-controls="collapseExample">
-                Button with data-target
-            </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-                {% include 'blocks/acceleration_request.html' %}
-            </div>
-        </div>
-    </div>
-</div>{% endcomment %}
 
 </body>
 </html>

@@ -2,7 +2,7 @@ from django import forms
 from django.forms import TextInput
 from django.utils.dateparse import parse_duration
 
-from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, Results
+from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, Results, Lap_time
 
 
 class DriverForm(forms.ModelForm):
@@ -163,14 +163,17 @@ class AXForm(ResultsForm):
         )
 
 
-class EnForm(forms.ModelForm):
+class LapTimeForm(ResultsForm):
     class Meta:
-        model = Endurance
+        model = Lap_time
 
-        exclude = ("",)
+        exclude = ('',)
 
         widgets = dict(
-            length_lap=forms.NumberInput(
-                attrs={'class': 'form-control col-md-6', 'placeholder': 'Meters'}
-            )
+            time=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': 'SSSS.MMM'}),
+
         )
+
+
+class Lap(forms.Form):
+    length = forms.DecimalField(min_value=0)

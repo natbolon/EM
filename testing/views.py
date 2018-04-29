@@ -12,8 +12,8 @@ from django_tables2.export import TableExport
 
 from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource, TestingResource
 from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable
-from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance
-from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, EnForm, ResultsForm
+from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, Lap_time
+from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, ResultsForm, Lap, LapTimeForm
 
 
 class New_Testing(generic.TemplateView):
@@ -47,6 +47,9 @@ class New_Testing(generic.TemplateView):
 
             elif data.event == "Autocross":
                 return redirect("../autocross")
+
+            elif data.event == "Endurance":
+                return redirect("../endurance")
 
             return redirect("../event")
 
@@ -185,7 +188,7 @@ def event(request):
     else:
 
         table = TestingTable(Testing.objects.all())
-        run = EnForm()
+        run = LapTimeForm()
         ref = 'blocks/endurance_request.html'
 
     results = ResultsForm()
@@ -379,29 +382,115 @@ class EnduranceV(generic.TemplateView):
             return redirect('../new_testing')
         data = obj[::-1][0]
 
+        lap_form = Lap()
+        info_req = "endurance/length_request.html"
+
+        args = {'table': None, 'data': data, 'run': lap_form, 'info_req': info_req,
+                'res': None, 'stat': None, 'stat_view': 'endurance/nothing.html', 'res_view': 'endurance/nothing.html'}
+
+        return render(request, "endurance/endurance.html", args)
+
+    def post(self, request, **kwargs):
+
+        obj = Testing.objects.filter(event="Endurance")
+        data = obj[::-1][0]
         table = TestingTable(obj)
         RequestConfig(request).configure(table)
 
-        run = EnForm()
-        results = ResultsForm()
-        stat = statistics()
-        stat_view = 'blocks/statistics.html'
-        args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/endurance_request.html',
-                'res': results, 'stat': stat, 'stat_view': stat_view}
-        # USE render! If redirect display of info does not work
-        return render(request, "testing/event.html", args)
+        if 'SUBMIT_1' in request.POST:
+            form = Lap(request.POST)
+            if form.is_valid():
+                data_lap = form.cleaned_data
+                length = float(data_lap.get('length'))
+                laps = round(11000 / length)
 
-    def post(self, request, **kwargs):
-        form = EnForm(request.POST)
-        model_instance = form.save(commit=False)
-        model_instance.setup_ini = Testing.objects.all()[::-1][0]
+                return create_endurance(request, laps, length, data, table)
 
-        if form.is_valid():
-            form.save(commit=False)
-            obj = Testing.objects.filter(event="Autocross")
-            if not obj:
-                return redirect('../new_testing')
+        elif 'SUBMIT_TIME' in request.POST:
+            return create_lap(request, data, table)
 
+        elif 'SUBMIT_SETUP' in request.POST:
+            end_form = NewTestingForm(request.POST)
+            if end_form.is_valid():
+                end_form.save()
+
+            instance = Endurance.objects.all()[::-1][0]
+            instance.setup_mid = data
+
+            obj = Testing.objects.filter(event="Endurance")
+            data = obj[::-1][0]
+            table = TestingTable(obj)
+            RequestConfig(request).configure(table)
+
+            run = LapTimeForm()
+            info_req = "endurance/endurance_request.html"
+
+            stat = statistics(None)
+            stat_view = 'blocks/statistics.html'
+            args = {'table': table, 'data': data, 'run': run, 'info_req': info_req,
+                    'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view, 'res_view': 'blocks/results.html'}
+            # USE render! If redirect display of info does not work
+            return render(request, "endurance/endurance.html", args)
+
+
+def create_endurance(request, laps, length, data, table):
+    instance = Endurance()
+    instance.length_lap = length
+    instance.number_laps = laps
+    instance.setup_ini = data
+    instance.save()
+
+    run = LapTimeForm()
+    info_req = "endurance/endurance_request.html"
+
+    stat = statistics(None)
+    stat_view = 'blocks/statistics.html'
+    args = {'table': table, 'data': data, 'run': run, 'info_req': info_req,
+            'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view, 'res_view': 'blocks/results.html'}
+    # USE render! If redirect display of info does not work
+    return render(request, "endurance/endurance.html", args)
+
+
+def create_lap(request, data, table):
+    form = LapTimeForm(request.POST)
+    lap_instance = form.save(commit=False)
+    lap_instance.driver = data.driver
+    if form.is_valid():
+        form.save()
+        endurance = Endurance.objects.all()[::-1][0]
+        endurance.time_lap.add(lap_instance)
+        endurance.save()
+
+        if len(endurance.time_lap.all()) == endurance.number_laps:
+            if not endurance.setup_mid:
+                form_setup = NewTestingForm(initial=model_to_dict(data))
+                form_setup.fields['driver'].queryset = Driver.objects.all()
+                posts = Testing.objects.all()
+
+                stat = statistics(Lap_time.objects.all())
+                stat_view = 'blocks/statistics.html'
+
+                args = {'table': table, 'data': data, 'run': None, 'info_req': 'endurance/nothing.html',
+                        'form': form_setup, 'stat': stat, 'stat_view': stat_view,
+                        'res_view': 'blocks/new_testing_form.html'}
+                # USE render! If redirect display of info does not work
+                return render(request, "endurance/endurance.html", args)
+            else:
+                return redirect("../old_testing/endurance")
+
+        elif len(endurance.time_lap.all()) == 2 * endurance.number_laps:
+            return redirect("../old_testing/endurance")
+
+        else:
+            run = LapTimeForm()
+            info_req = "endurance/endurance_request.html"
+
+            stat = statistics(Lap_time.objects.all())
+            stat_view = 'blocks/statistics.html'
+            args = {'table': table, 'data': data, 'run': run, 'info_req': info_req,
+                    'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view, 'res_view': 'blocks/results.html'}
+            # USE render! If redirect display of info does not work
+            return render(request, "endurance/endurance.html", args)
 
 
 def statistics(obj):
@@ -470,12 +559,10 @@ def best_results(request, event):
 
         stats = statistics(objs.all())
         if stats[2] == 0:
-            #Redirects to creating a new testign session as there are no results about it. 
+            # Redirects to creating a new testign session as there are no results about it.
             return redirect('../{}'.format(event))
         else:
             min_time = stats[1]
             data = objs.filter(time=min_time)[0]
 
             return render(request, 'testing/best_results.html', {'data': data, })
-
-

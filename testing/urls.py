@@ -6,12 +6,13 @@ app_name = 'testing'
 urlpatterns = [
     path('home/', views.home, name='home'),
     path('new_driver/', views.new_driver.as_view(), name='new_driver'),
+    path('drivers/', views.Drivers.as_view(), name='drivers'),
     path('new_testing/', views.New_Testing.as_view(), name='new_testing'),
     path('acceleration/', views.AccelerationV.as_view(), name='acceleration'),
-    path('drivers/', views.Drivers.as_view(), name='drivers'),
     path('event/', views.event, name='event'),
     path('skidpad/', views.SKV.as_view(), name='skid_pad'),
     path('autocross/', views.AutoXV.as_view(), name='autocross'),
+    path('endurance/', views.EnduranceV.as_view(), name='endurance'),
     path('old_testing/<slug:event>', views.Old_Testing_Class.as_view(), name='old_testing'),
     path('old_test/<str:event>', views.Old_Testing_Class.as_view(), name='old_test')
 ]

@@ -1,0 +1,264 @@
+<div class="panel panel-default">
+    <div class="panel-body form-horizontal payment-form"
+         style="background-color: #ffffff">
+        <div class="form-group">
+            <!-- Name -->
+            <label for="name" class="col-xs-3 control-label">Driver:</label>
+            <div class="col-sm-7">
+                {{ form.driver }}
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none">
+            <!-- Location -->
+            <label for="Location" class="col-xs-3 control-label">Location:</label>
+            <div class="col-sm-7">
+                {{ form.location }}
+            </div>
+        </div>
+        <div class="form-group" style="display: none">
+            <!-- Event -->
+            <label for="Event" class="col-xs-3 control-label">Event:</label>
+            <div class="col-sm-7">
+                {{ form.event }}
+            </div>
+        </div>
+
+        <div class="form-line" data-type="control_divider" id="id_9">
+            <div id="cid_9" class="form-input-wide">
+                <div data-component="divider"
+                     style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                </div>
+            </div>
+            <p align="center" style="font-size: medium">POWERTRAIN PARAMETERS</p>
+            <div id="cid_9" class="form-input-wide">
+                <div data-component="divider"
+                     style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <!-- Mode -->
+            <label for="Event" class="col-sm-3 control-label">Mode:</label>
+            <div class="col-sm-7">
+                {{ form.mode }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <!-- Cont current -->
+            <label for="Event" class="col-sm-3 control-label">Continuous current:</label>
+            <div class="col-sm-3">
+                {{ form.cont_current_p }}
+            </div>
+
+            <!-- Peak current -->
+            <label for="Event" class="col-sm-3 control-label">Peak current:</label>
+            <div class="col-sm-3">
+                {{ form.peak_current_p }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <!-- KP current -->
+            <label for="Event" class="col-sm-3 control-label">KP current:</label>
+            <div class="col-sm-3">
+                {{ form.kp_current }}
+            </div>
+
+            <!-- TI current -->
+            <label for="Event" class="col-sm-3 control-label">TI current:</label>
+            <div class="col-sm-3">
+                {{ form.ti_current }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <!-- KP speed -->
+            <label for="Event" class="col-sm-3 control-label">KP speed:</label>
+            <div class="col-sm-3">
+                {{ form.kp_speed }}
+            </div>
+
+            <!-- TI speed -->
+            <label for="Event" class="col-sm-3 control-label">TI speed:</label>
+            <div class="col-sm-3">
+                {{ form.ti_speed }}
+            </div>
+        </div>
+
+        <div style="display:none;">
+            <div class="form-line" data-type="control_divider" id="id_9">
+                <div id="cid_9" class="form-input-wide">
+                    <div data-component="divider"
+                         style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                    </div>
+                </div>
+                <p align="center" style="font-size: medium">DYNAMIC PARAMETERS</p>
+                <div id="cid_9" class="form-input-wide">
+                    <div data-component="divider"
+                         style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <!-- Front Camber -->
+                <label for="Event" class="col-sm-3 control-label">Front Camber:</label>
+                <div class="col-sm-3">
+                    {{ form.front_camber }}
+                </div>
+
+                <!-- Rear Camber -->
+                <label for="Event" class="col-sm-3 control-label">Rear Camber:</label>
+                <div class="col-sm-3">
+                    {{ form.rear_camber }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Front Toe -->
+                <label for="Event" class="col-sm-3 control-label">Front Toe:</label>
+                <div class="col-sm-3">
+                    {{ form.front_toe }}
+                </div>
+
+                <!-- Rear Toe -->
+                <label for="Event" class="col-sm-3 control-label">Rear Toe:</label>
+                <div class="col-sm-3">
+                    {{ form.rear_toe }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Front Pressure -->
+                <label for="Event" class="col-sm-3 control-label">Front Pressure:</label>
+                <div class="col-sm-3">
+                    {{ form.front_pressure }}
+                </div>
+
+                <!-- Rear Pressure -->
+                <label for="Event" class="col-sm-3 control-label">Rear Pressure:</label>
+                <div class="col-sm-3">
+                    {{ form.rear_pressure }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Front Height -->
+                <label for="Event" class="col-sm-3 control-label">Front Height:</label>
+                <div class="col-sm-3">
+                    {{ form.front_height }}
+                </div>
+
+                <!-- Rear Height -->
+                <label for="Event" class="col-sm-3 control-label">Rear Height:</label>
+                <div class="col-sm-3">
+                    {{ form.rear_height }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Front Weight -->
+                <label for="Event" class="col-sm-3 control-label">Front Weight:</label>
+                <div class="col-sm-3">
+                    {{ form.front_weight }}
+                </div>
+
+                <!-- Rear Weight -->
+                <label for="Event" class="col-sm-3 control-label">Rear Weight:</label>
+                <div class="col-sm-3">
+                    {{ form.rear_weight }}
+                </div>
+            </div>
+
+
+            <div class="form-line" data-type="control_divider" id="id_9">
+                <div id="cid_9" class="form-input-wide">
+                    <div data-component="divider"
+                         style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                    </div>
+                </div>
+                <p align="center" style="font-size: medium">AERODYNAMIC PARAMETERS</p>
+                <div id="cid_9" class="form-input-wide">
+                    <div data-component="divider"
+                         style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <!-- DRS -->
+                <label for="Event" class="col-sm-3 control-label">DRS Active:</label>
+                <div class="col-sm-7">
+                    {{ form.drs }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Front Wing F1 -->
+                <label for="Event" class="col-sm-3 control-label">Front Wing Flap 1:</label>
+                <div class="col-sm-3">
+                    {{ form.fw_flap1_degrees }}
+                </div>
+
+                <!-- Front Wing F2 -->
+                <label for="Event" class="col-sm-3 control-label">Front Wing Flap 2:</label>
+                <div class="col-sm-3">
+                    {{ form.fw_flap2_degrees }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Rear Wing F1 -->
+                <label for="Event" class="col-sm-3 control-label">Rear Wing Flap 1:</label>
+                <div class="col-sm-3">
+                    {{ form.rw_flap1_degrees }}
+                </div>
+
+                <!-- Rear Wing F2 -->
+                <label for="Event" class="col-sm-3 control-label">Rear Wing Flap 2:</label>
+                <div class="col-sm-3">
+                    {{ form.rw_flap2_degrees }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-line" data-type="control_divider" id="id_9">
+            <div id="cid_9" class="form-input-wide">
+                <div data-component="divider"
+                     style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                </div>
+            </div>
+            <p align="center" style="font-size: medium">COMMENTS</p>
+            <div id="cid_9" class="form-input-wide">
+                <div data-component="divider"
+                     style="border-bottom:3px solid #ffffff;height:1px;margin-left:0px;margin-right:0px;margin-top:5px;margin-bottom:5px;">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group" align="center">
+            <!-- DRS -->
+            <div class="col-sm-10" align="center">
+                {{ form.comments }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12 text-right">
+                <button name="SUBMIT_SETUP" type="submit" class="btn btn-default preview-add-button">
+                    <span class="glyphicon glyphicon-plus"></span> SUBMIT
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
