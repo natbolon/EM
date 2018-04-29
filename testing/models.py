@@ -34,6 +34,8 @@ class DynamicParams(models.Model):
     rear_weight = models.DecimalField(decimal_places=2, max_digits=4, default=0)
     front_height = models.DecimalField(decimal_places=2, max_digits=4, default=0)
     rear_height = models.DecimalField(decimal_places=2, max_digits=4, default=0)
+    roll_bar = models.DecimalField(decimal_places=0, max_digits=2, default=0)
+    antiroll_bar = models.DecimalField(decimal_places=0, max_digits=2, default=0)
 
     class Meta:
         abstract = True

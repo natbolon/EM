@@ -87,6 +87,10 @@ class NewTestingForm(forms.ModelForm):
                 attrs={'class': 'form-control col-md-6', 'placeholder': 'Front Height'}),
             rear_height=forms.NumberInput(
                 attrs={'class': 'form-control col-md-6', 'placeholder': 'Rear Height'}),
+            roll_bar=forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Roll Bar Position'}),
+            antiroll_bar=forms.NumberInput(
+                attrs={'class': 'form-control col-md-6', 'placeholder': 'Antiroll Bar Position'}),
             comments=forms.TextInput(
                 attrs={'class': 'form-control col-md-6', 'placeholder': '...'}
             )
