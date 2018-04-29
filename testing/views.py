@@ -329,7 +329,7 @@ class AutoXV(generic.TemplateView):
         stat = statistics(AutoX.objects.all())
         stat_view = 'blocks/statistics.html'
         args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html',
-                'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
+                'res': results, 'stat': stat, 'stat_view': stat_view}
         # USE render! If redirect display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -352,7 +352,7 @@ class AutoXV(generic.TemplateView):
             stat = statistics(AutoX.objects.all())
             stat_view = 'blocks/statistics.html'
             args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html',
-                    'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
+                    'res': results, 'stat': stat, 'stat_view': stat_view}
             # USE render! If redirect, display of info does not work
             return render(request, "testing/event.html", args)
 
@@ -367,7 +367,7 @@ class AutoXV(generic.TemplateView):
         stat = statistics(AutoX.objects.all())
         stat_view = 'blocks/statistics.html'
         args = {'table': table, 'data': data, 'run': run, 'req': 'blocks/autocross_request.html',
-                'res': ResultsForm(), 'stat': stat, 'stat_view': stat_view}
+                'res': results, 'stat': stat, 'stat_view': stat_view}
         # USE render! If redirect, display of info does not work
         return render(request, "testing/event.html", args)
 
@@ -415,7 +415,8 @@ class EnduranceV(generic.TemplateView):
                 end_form.save()
 
             instance = Endurance.objects.all()[::-1][0]
-            instance.setup_mid = data
+            instance.__setattr__('setup_mid', data)
+            instance.save()
 
             obj = Testing.objects.filter(event="Endurance")
             data = obj[::-1][0]
@@ -465,7 +466,6 @@ def create_lap(request, data, table):
             if not endurance.setup_mid:
                 form_setup = NewTestingForm(initial=model_to_dict(data))
                 form_setup.fields['driver'].queryset = Driver.objects.all()
-                posts = Testing.objects.all()
 
                 stat = statistics(Lap_time.objects.all())
                 stat_view = 'blocks/statistics.html'
