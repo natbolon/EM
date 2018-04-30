@@ -1,11 +1,8 @@
-import math
 
-import datetime
 from django.db.models import Avg, Min, Max
 from django.forms import model_to_dict
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, Http404
-from django.template import loader
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.views import generic
 from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
