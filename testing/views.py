@@ -113,7 +113,7 @@ class Old_Testing(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         event = kwargs['event']
-        model, _, table = self.check_model(event)
+        model, _, _, table = self.check_model(event)
         button = 'blocks/best_conf.html'
         if event not in ['acceleration', 'skidpad', 'autocross']:
             button = 'endurance/nothing.html'
@@ -125,7 +125,9 @@ class Old_Testing(generic.TemplateView):
         event = kwargs['event']
 
         if 'export_csv' in request.POST:
-            model, model_rs, table = self.check_model(event)
+            model, model_rs, info, table = self.check_model(event)
+            if event == "acceleration":
+                return export_CSV_acc(info)
             return self.export(event, model_rs)
         else:
             return best_results(request, event)
@@ -167,7 +169,7 @@ class Old_Testing(generic.TemplateView):
             info = Testing.objects.all()
             table = TestingTable(info)
 
-        return model, model_rs, table
+        return model, model_rs, info, table
 
     def export(self, event, model_rs):
         model_resource = model_rs
@@ -177,6 +179,35 @@ class Old_Testing(generic.TemplateView):
         response['Content-Disposition'] = 'attachment; filename={fn}'.format(fn=filename)
         return response
 
+
+def export_CSV_acc(queryset):
+    import csv
+    from django.utils.encoding import smart_str
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=acceleration.csv'
+    writer = csv.writer(response, csv.excel)
+    response.write(u'\ufeff'.encode('utf8'))  # BOM (optional...Excel needs it to open UTF-8 file properly)
+
+    writer.writerow([
+        smart_str(u"ID"),
+        smart_str(u"Date"),
+        smart_str(u"Params"),
+        smart_str(u"Driver"),
+        smart_str(u"Location"),
+        smart_str(u"Time"),
+
+    ])
+    for obj in queryset:
+        writer.writerow([
+            smart_str(obj.id),
+            smart_str(obj.date),
+            smart_str(obj.params),
+            smart_str(obj.params.driver),
+            smart_str(obj.params.location),
+            smart_str(obj.time),
+
+        ])
+    return response
 
 def home(request):
     return render(request, 'testing/home.html')
