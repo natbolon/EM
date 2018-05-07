@@ -7,7 +7,7 @@ from django.views import generic
 from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
 
-from testing.exports import export_CSV_acc, export_CSV_skidpad
+from testing.exports import export_CSV_acc, export_CSV_skidpad, export_CSV_endurance
 from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource, TestingResource, \
     EnduranceResource, LapsResource
 from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable, \
@@ -131,7 +131,8 @@ class Old_Testing(generic.TemplateView):
                 return export_CSV_acc(info, event)
             elif event == "skidpad":
                 return export_CSV_skidpad(info)
-            return self.export(event, model_rs)
+            else:
+                return export_CSV_endurance(info,event)
         else:
             return best_results(request, event)
 
@@ -174,13 +175,6 @@ class Old_Testing(generic.TemplateView):
 
         return model, model_rs, info, table
 
-    def export(self, event, model_rs):
-        model_resource = model_rs
-        dataset = model_resource.export()
-        response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
-        filename = '{}.xls'.format(event)
-        response['Content-Disposition'] = 'attachment; filename={fn}'.format(fn=filename)
-        return response
 
 
 
