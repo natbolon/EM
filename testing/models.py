@@ -118,7 +118,7 @@ class Results(models.Model):
 
 class Acceleration(Results):
     id = models.AutoField(primary_key=True)
-    length = 75
+    length_lap = 75
     time = models.DecimalField(decimal_places=3, max_digits=5, default='')
     date = models.DateTimeField(auto_now=True)
     params = models.ForeignKey(Testing, on_delete=models.CASCADE, null=True, blank=True)

@@ -131,7 +131,7 @@ class AccForm(ResultsForm):
     class Meta:
         model = Acceleration
 
-        exclude = ('length', 'params')
+        exclude = ("length_lap", 'params')
 
         widgets = dict(
             time=forms.NumberInput(attrs={'class': 'form-control col-md-6', 'placeholder': 'SS.MMM'}),
