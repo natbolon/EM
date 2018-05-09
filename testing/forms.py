@@ -6,6 +6,9 @@ from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, R
 
 
 class DriverForm(forms.ModelForm):
+    """
+    Model Form related to Driver Model. Allows registering the data associated to a driver.
+    """
     class Meta:
         model = Driver
         # fields = ['name', 'surname', 'email', 'birthday', 'gender', 'weight', 'height']
@@ -35,6 +38,10 @@ class DriverForm(forms.ModelForm):
 
 
 class NewTestingForm(forms.ModelForm):
+    """
+    Model Form related to Testing Model. Allows registering the setup of the vehicle
+    during a run, independently of the event.
+    """
     class Meta:
         model = Testing
 
@@ -100,6 +107,9 @@ class NewTestingForm(forms.ModelForm):
 
 
 class ResultsForm(forms.ModelForm):
+    """ Model Form related to Results Model. Allows registering the changes incurred in the vehicle
+    parameters during a run, independently of the event.
+    """
     class Meta:
         model = Results
         exclude = ("",)
@@ -128,6 +138,7 @@ class ResultsForm(forms.ModelForm):
 
 
 class AccForm(ResultsForm):
+    """ Model Form related to Acceleration. Allows registering the time of each run"""
     class Meta:
         model = Acceleration
 
@@ -140,6 +151,7 @@ class AccForm(ResultsForm):
 
 
 class SkForm(ResultsForm):
+    """ Model Form related to Skid Pad. Allows registering the four times involved in the Skid Pad event"""
     class Meta:
         model = Skid_Pad
 
@@ -154,6 +166,7 @@ class SkForm(ResultsForm):
 
 
 class AXForm(ResultsForm):
+    """ Model Form related to Autocross Model. Allows registering the time and length of each lap"""
     class Meta:
         model = AutoX
 
@@ -168,6 +181,7 @@ class AXForm(ResultsForm):
 
 
 class LapTimeForm(ResultsForm):
+    """ Registers the time for each lap in an Endurance; Related to Lap_time model"""
     class Meta:
         model = Lap_time
 
@@ -180,4 +194,5 @@ class LapTimeForm(ResultsForm):
 
 
 class Lap(forms.Form):
+    """ only used for registering the lap length in the event of Endurance; Model independent"""
     length = forms.DecimalField(min_value=0)

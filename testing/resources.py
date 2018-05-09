@@ -9,32 +9,6 @@ class DriverResource(resources.ModelResource):
         model = Driver
 
 
-class AccelerationResource(resources.ModelResource):
-    class Meta:
-        model = Acceleration
-        widgets = {
-            'params.date': {'format': '%d.%m.%Y'},
-        }
-
-
-class AutoXResource(resources.ModelResource):
-    class Meta:
-        model = AutoX
-
-
-class SkidPadResource(resources.ModelResource):
-    class Meta:
-        model = Skid_Pad
-
-
-class EnduranceResource(resources.ModelResource):
-    class Meta:
-        model = Endurance
-
-        fields = ('id', 'length_lap', 'number_laps', 'setup_ini',
-                  'setup_mid', 'setup_ini.driver', 'setup_mid.driver', 'time_lap', 'setup_ini.date')
-
-
 class TestingResource(resources.ModelResource):
     class Meta:
         model = Testing

@@ -1,16 +1,25 @@
+import csv
+from django.utils.encoding import smart_str
 from django.http import HttpResponse
 
 from testing.models import Lap_time
 
 
 def export_CSV_acc(queryset, event):
-    import csv
-    from django.utils.encoding import smart_str
+    """
+    Generate custom CSV file with all the acceleration data saved up to the moment.
+
+    :param queryset: Group of objects in the dataset corresponding to the related event
+    :param event: Event -- Acceleration or Autocross
+    :return: .CSV file
+    """
+
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename={}.csv'.format(event)
     writer = csv.writer(response, csv.excel)
     response.write(u'\ufeff'.encode('utf8'))  # BOM (optional...Excel needs it to open UTF-8 file properly)
 
+    # define first row -- Headers of columns
     writer.writerow([
         smart_str(u"ID"),
         smart_str(u"Time"),
@@ -46,6 +55,8 @@ def export_CSV_acc(queryset, event):
         smart_str(u"Initial Temperature Pneu RR"), smart_str(u"Final Temperature Pneu RR"),
 
     ])
+
+    # write each acceleration/autocross run in a new row following the column order set before
     for obj in queryset:
         writer.writerow([
             smart_str(obj.id),
@@ -87,13 +98,21 @@ def export_CSV_acc(queryset, event):
 
 
 def export_CSV_skidpad(queryset):
-    import csv
-    from django.utils.encoding import smart_str
+    """
+    Generate custom CSV file with all the skidpad data saved up to the moment.
+
+    :param queryset: Group of objects in the dataset corresponding to the related event
+    :param event: Event -- Skid Pad
+    :return: .CSV file
+    """
+
+
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=skidpad.csv'
     writer = csv.writer(response, csv.excel)
     response.write(u'\ufeff'.encode('utf8'))  # BOM (optional...Excel needs it to open UTF-8 file properly)
 
+    # define first row -- Headers of columns
     writer.writerow([
         smart_str(u"ID"),
         smart_str(u"Total Time"),
@@ -131,6 +150,8 @@ def export_CSV_skidpad(queryset):
         smart_str(u"Initial Temperature Pneu RR"), smart_str(u"Final Temperature Pneu RR"),
 
     ])
+
+    # write each skidpad run in a new row following the column order set before
     for obj in queryset:
         writer.writerow([
             smart_str(obj.id),
@@ -174,13 +195,20 @@ def export_CSV_skidpad(queryset):
 
 
 def export_CSV_endurance(queryset, event):
-    import csv
-    from django.utils.encoding import smart_str
+    """
+    Generate custom CSV file with all the endurance data saved up to the moment.
+
+    :param queryset: Group of objects in the dataset corresponding to the related event
+    :param event: Event -- Endurance
+    :return: .CSV file
+    """
+
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename={}.csv'.format(event)
     writer = csv.writer(response, csv.excel)
     response.write(u'\ufeff'.encode('utf8'))  # BOM (optional...Excel needs it to open UTF-8 file properly)
 
+    # define first row -- Headers of columns
     writer.writerow([
         smart_str(u"ID"),
         smart_str(u"Time"),
@@ -217,7 +245,9 @@ def export_CSV_endurance(queryset, event):
 
     ])
 
+    # For each endurance registered up to now it writes all the info related to it.
     for end in queryset:
+        # write a first line with data related to the environment (not laps)
         writer.writerow([
             smart_str(end.id),
             smart_str(' '),
@@ -229,8 +259,9 @@ def export_CSV_endurance(queryset, event):
         ])
 
         laps = Lap_time.objects.filter(endurance=end.id)
-        n_laps = len(laps)/2
+        n_laps = len(laps) / 2
         i = 1
+        # write each lap and its corresponding parameters
         for obj in laps:
             if i > n_laps:
                 setup = end.setup_mid

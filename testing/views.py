@@ -1,4 +1,3 @@
-
 from django.db.models import Avg, Min
 from django.forms import model_to_dict
 from django.shortcuts import render, redirect
@@ -14,6 +13,56 @@ from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPad
     LapTable
 from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, Lap_time
 from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, ResultsForm, Lap, LapTimeForm
+
+
+class New_Driver(generic.TemplateView):
+    model = Driver
+    template_name = 'testing/new_driver.html'
+
+    def get(self, request):
+        form = DriverForm()
+
+        args = {'form': form, }
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        form = DriverForm(request.POST)
+        if form.is_valid():
+            form.save()
+            table_driver = DriverTable(Driver.objects.all())
+            RequestConfig(request).configure(table_driver)
+            return redirect('../drivers', {'table': table_driver})
+
+        return render(request, self.template_name, {'form': form})
+
+
+class Drivers(generic.TemplateView):
+    model = Driver
+    template_name = 'testing/drivers.html'
+
+    def get(self, request):
+        table = DriverTable(Driver.objects.all())
+        RequestConfig(request).configure(table)
+
+        export_format = request.GET.get('_export', )
+        if TableExport.is_valid_format(export_format):
+            exporter = TableExport(export_format, table)
+            return exporter.response('table.{}'.format(export_format))
+
+        return render(request, self.template_name, {'table': table})
+
+    def post(self, request):
+        if 'export_csv' in request.POST:
+            return self.export()
+        else:
+            return self.get(request)
+
+    def export(self):
+        person_resource = DriverResource()
+        dataset = person_resource.export()
+        response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="drivers.xls"'
+        return response
 
 
 class New_Testing(generic.TemplateView):
@@ -62,59 +111,12 @@ class New_Testing(generic.TemplateView):
         return render(request, self.template_name, {'form': form})
 
 
-class New_Driver(generic.TemplateView):
-    model = Driver
-    template_name = 'testing/new_driver.html'
-
-    def get(self, request):
-        form = DriverForm()
-
-        args = {'form': form, }
-        return render(request, self.template_name, args)
-
-    def post(self, request):
-        form = DriverForm(request.POST)
-        if form.is_valid():
-            form.save()
-            table_driver = DriverTable(Driver.objects.all())
-            RequestConfig(request).configure(table_driver)
-            return redirect('../drivers', {'table': table_driver})
-
-        return render(request, self.template_name, {'form': form})
-
-
-class Drivers(generic.TemplateView):
-    model = Driver
-    template_name = 'testing/drivers.html'
-
-    def get(self, request):
-        table = DriverTable(Driver.objects.all())
-        RequestConfig(request).configure(table)
-
-        export_format = request.GET.get('_export', )
-        if TableExport.is_valid_format(export_format):
-            exporter = TableExport(export_format, table)
-            return exporter.response('table.{}'.format(export_format))
-
-        return render(request, self.template_name, {'table': table})
-
-    def post(self, request):
-        return self.export(request)
-
-    def export(self, request):
-        person_resource = DriverResource()
-        dataset = person_resource.export()
-        response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
-        response['Content-Disposition'] = 'attachment; filename="drivers.xls"'
-        return response
-
-
 class Old_Testing(generic.TemplateView):
     template_name = 'testing/old_testing.html'
 
     def get(self, request, *args, **kwargs):
         event = kwargs['event']
-        model, _, _, table = self.check_model(event)
+        model, _, table = self.check_model(event)
         button = 'blocks/best_conf.html'
         if event not in ['acceleration', 'skidpad', 'autocross']:
             button = 'endurance/nothing.html'
@@ -126,57 +128,54 @@ class Old_Testing(generic.TemplateView):
         event = kwargs['event']
 
         if 'export_csv' in request.POST:
-            model, model_rs, info, table = self.check_model(event)
+            model, info, table = self.check_model(event)
             if event == "acceleration" or event == "autocross":
                 return export_CSV_acc(info, event)
             elif event == "skidpad":
                 return export_CSV_skidpad(info)
+            elif event == "endurance":
+                return export_CSV_endurance(info, event)
             else:
-                return export_CSV_endurance(info,event)
+                resource = TestingResource()
+                dataset = resource.export()
+                response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+                response['Content-Disposition'] = 'attachment; filename="setup.xls"'
+                return response
         else:
             return best_results(request, event)
 
     def check_model(self, event):
         if event == "acceleration":
             model = Acceleration
-            model_rs = AccelerationResource()
             info = Acceleration.objects.all()
             table = AccelerationTable(info)
 
         elif event == "skidpad":
             model = Skid_Pad
-            model_rs = SkidPadResource()
             info = Skid_Pad.objects.all()
             table = SkidPadTable(info)
 
         elif event == "autocross":
             model = AutoX
-            model_rs = AutoXResource()
             info = AutoX.objects.all()
             table = AutoXTable(info)
 
         elif event == "endurance":
             model = Endurance
-            model_rs = EnduranceResource()
             info = Endurance.objects.all()
             table = EnduranceTable(info)
 
         elif event == "laps":
             model = Lap_time
-            model_rs = LapsResource()
             info = Lap_time.objects.all()
             table = LapTable(info)
 
         else:
             model = Testing
-            model_rs = TestingResource()
             info = Testing.objects.all()
             table = TestingTable(info)
 
-        return model, model_rs, info, table
-
-
-
+        return model, info, table
 
 
 def home(request):
@@ -196,11 +195,17 @@ def check_event(event):
         stat_obj = Skid_Pad.objects.all()
         req = 'blocks/skid_pad_request.html'
 
-    else:
+    elif event == "autocross":
         obj = Testing.objects.filter(event="Autocross")
         run = AXForm()
         stat_obj = AutoX.objects.all()
         req = 'blocks/autocross_request.html'
+
+    else:
+        obj = Testing.objects.filter(event="Endurance")
+        run = LapTimeForm()
+        stat_obj = Endurance.objects.all()
+        req = None
 
     return obj, run, stat_obj, req
 
