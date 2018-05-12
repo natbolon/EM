@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rq&n($+5&-ig1mzf&-qy32$r3*3$fvnmzb_hcxlv@9syuv2emo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ.get('DEBUG', 1) == 1 else False
+DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
 ALLOWED_HOSTS = ['etseibmotorsport.herokuapp.com']
 
