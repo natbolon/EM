@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import dj_database_url
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rq&n($+5&-ig1mzf&-qy32$r3*3$fvnmzb_hcxlv@9syuv2emo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['etseibmotorsport.herokuapp.com']
 
 # Application definition
 
@@ -75,12 +77,17 @@ WSGI_APPLICATION = 'EM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -118,3 +125,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+django_heroku.settings(locals())
+
