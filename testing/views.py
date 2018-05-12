@@ -7,12 +7,11 @@ from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
 
 from testing.exports import export_CSV_acc, export_CSV_skidpad, export_CSV_endurance
-from testing.resources import DriverResource, AccelerationResource, AutoXResource, SkidPadResource, TestingResource, \
-    EnduranceResource, LapsResource
+from testing.resources import DriverResource, TestingResource
 from testing.tables import DriverTable, TestingTable, AccelerationTable, SkidPadTable, AutoXTable, EnduranceTable, \
     LapTable
-from .models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, Lap_time
-from .forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, ResultsForm, Lap, LapTimeForm
+from testing.models import Driver, Testing, Acceleration, Skid_Pad, AutoX, Endurance, Lap_time
+from testing.forms import DriverForm, NewTestingForm, AccForm, SkForm, AXForm, ResultsForm, Lap, LapTimeForm
 
 
 class New_Driver(generic.TemplateView):
