@@ -38,6 +38,7 @@ class AccelerationTable(tables.Table):
 
     class Meta:
         model = Acceleration
+        #template associated for the display of the table
         template_name = 'django_tables2/bootstrap-responsive.html'
         #define fields to be displayed
         fields = ('id', 'time', 'date', 'setup', 'driver', 'driver_', 'place')
@@ -53,10 +54,13 @@ class SkidPadTable(tables.Table):
     time = Column(accessor='time', verbose_name='Total time')
 
     class Meta:
+        #define the Model related to the table
         model = Skid_Pad
+        # template associated for the display of the table
         template_name = 'django_tables2/bootstrap-responsive.html'
-        fields = (
-            'id', 'l1_time', 'l2_time', 'r1_time', 'r2_time', 'time', 'date', 'setup', 'driver', 'driver_', 'place')
+        # define fields to be displayed
+        fields = ('id', 'l1_time', 'l2_time', 'r1_time', 'r2_time',
+                  'time', 'date', 'setup', 'driver', 'driver_', 'place')
 
 
 class AutoXTable(tables.Table):

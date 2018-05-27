@@ -486,6 +486,7 @@ def best_results(request, event):
         stats = statistics_sk(Skid_Pad.objects.all())
         runs = stats[2]
         if runs == 0:
+            # Redirects to New Testing Session as there are no results about it.
             return redirect('../{}'.format(event))
         else:
             min_l = stats[4]
