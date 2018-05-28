@@ -11,26 +11,102 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
-        {#.container {#}
-        {#    background-image: url({% static "img/cat10e.jpg" %});#}
-        {
-        #}#}
+        div.competitions{
+            padding-left: 5px; padding-right: 5px; padding-bottom: 20px;
+
+        }
+
     </style>
 </head>
 <body>
 
 <!-- Page header-->
-<div>
+<div style="padding-bottom: 50px">
 
     {% include 'blocks/nav.html' %}
-    <h1 align="center">CAT11e</h1>
 </div>
 
 
+<!-- Page Content -->
 <div class="container">
-    <h1 style="color: #6c7aff; padding-top: 100px;" align="center">
-        WELCOME TO THE TESTING APP OF ETSEIB MOTORSPORT</h1>
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4" style="background-color: #def0fa">
+        <h1 class="display-3" style="alignment: center; color: rgba(83,95,114,0.65);"> Welcome to the Testing APP of ETSEIB Motorsport</h1>
+        <a href="../new_testing" class="btn btn-primary btn-lg" style="alignment: center">Let's begin with some testing!</a>
+    </header>
+
+    <!-- Page Features -->
+    <div class="row text-center">
+
+        <div class="container competitions col-lg-3 col-sm-6 col-xs-12">
+            <div>
+                <img class="card-img-top" src="https://www.formulastudent.de/fileadmin/templates/main/img/leftLogoFSG.jpg"
+                     alt="FSG" style="max-width: 200px; height: 100px">
+                <div class="card-body">
+                    <h4 class="card-title">Formula Student GERMANY</h4>
+                    <p class="card-text">Follow the latest news about the most important competition in Formula Student.
+                        Let's race the future!</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://www.formulastudent.de/" class="btn btn-primary">Find Out More!</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container competitions col-lg-3 col-sm-6 col-xs-12">
+            <div class="card">
+                <img class="card-img-top"
+                     src="data:image/jpeg;base64,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"
+                     alt="FSEast" style="max-width: 200px; height: 100px">
+                <div class="card-body">
+                    <h4 class="card-title">Formula Student EAST</h4>
+                    <p class="card-text">First competition of this season.
+                        Find out who is going to be joining the track with the CAT11e!</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://fseast.eu/" class="btn btn-primary">Find Out More!</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container competitions col-lg-3 col-sm-6 col-xs-12">
+            <div class="card">
+                <img class="card-img-top" src="http://www.racing.agh.edu.pl/bezpiecznastrona/wp-content/uploads/fscz2013_logo.jpg"
+                     alt="FSZECH" style="max-width: 200px; height: 100px">
+                <div class="card-body">
+                    <h4 class="card-title">Formula Student CZECH</h4>
+                    <p class="card-text"> Great memories from a great track. Look up what's waiting for you this summer at
+                    FS Czech Republic! </p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://www.fsczech.cz/" class="btn btn-primary">Find Out More!</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container competitions col-lg-3 col-sm-6 col-xs-12">
+            <div class="card">
+                <img class="card-img-top" src="http://www.umicore.com/storage/main/sized/fss2012-logopng-max-482x0.png?1494506976"
+                     alt="FSS" style="max-width: 200px; height: 100px">
+                <div class="card-body">
+                    <h4 class="card-title">Formula Student SPAIN</h4>
+                    <p class="card-text">Last but not least, the home competition! Find out what is being prepared for the
+                        last event of the season!</p>
+                </div>
+                <div class="card-footer">
+                    <a href="http://formulastudent.es/" class="btn btn-primary">Find Out More!</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
 </div>
+<!-- /.container -->
 
 </body>
 </html>
