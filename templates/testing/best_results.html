@@ -21,17 +21,26 @@
     <h1 align="center">CAT11e</h1>
 </div>
 
+<!-- End Page header-->
+
+
 <form method="post">
     {% csrf_token %}
+    <!-- Container of size 1 to adjust the location of the main container-->
     <div class="col-sm-1"></div>
+
+    <!-- Open Container Information-->
     <div class="col-sm-10" align="center" style="padding-left: 40px; padding-right: 40px">
 
+        <!-- Start Collapsible Dynamic Parameters-->
 
         <div>
             <a class="col-sm-12" data-toggle="collapse" href="#dyn"
                style="font-size: large; color: #000; font-weight: bold">
                 Dynamic parameters</a>
         </div>
+
+
 
         <div id="dyn" class="container collapse col-sm-12" style="padding: 10px">
             <div class="table-responsive">
@@ -69,6 +78,8 @@
             </div>
         </div>
 
+        <!-- End Collapsible Dynamic Parameters-->
+        <!-- Start Collapsible Aerodynamic Parameters-->
         <div>
             <a class="col-sm-12" data-toggle="collapse" href="#aer"
                style="font-size: large; color: #000; font-weight: bold">
@@ -99,6 +110,8 @@
             </div>
         </div>
 
+        <!-- End Collapsible Aerodynamic Parameters-->
+        <!-- Start Collapsible Powertrain Parameters-->
         <div>
             <a class="col-sm-12" data-toggle="collapse" href="#pwt"
                style="font-size: large; color: #000; font-weight: bold">
@@ -133,7 +146,8 @@
                 </table>
             </div>
         </div>
-
+        <!-- End Collapsible Powertrain Parameters-->
+        <!-- Start Collapsible Results-->
 
         <div>
             <a class="col-sm-12" data-toggle="collapse" href="#results"
@@ -166,19 +180,13 @@
             </div>
         </div>
 
-
+        <!-- End Collapsible Results-->
     </div>
+    <!-- End Container Information-->
     <div class="col-sm-1"></div>
 
 
-    {#    <div class="form-group">#}
-    {#        <div class="col-sm-11 text-right">#}
-    {#            <button name="export_csv" type="submit" class="btn btn-default preview-add-button">#}
-    {#                <span class="glyphicon"></span> EXPORT AS XLS#}
-    {#            </button>#}
-    {#        </div>#}
-    {#        <div class="col-sm-2"></div>#}
-    {#    </div>#}
+
 </form>
 
 </body>

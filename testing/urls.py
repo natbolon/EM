@@ -4,6 +4,7 @@ from . import views
 
 app_name = 'testing'
 urlpatterns = [
+    path('', views.home, name='home'),
     path('home/', views.home, name='home'),
     path('new_driver/', views.New_Driver.as_view(), name='new_driver'),
     path('drivers/', views.Drivers.as_view(), name='drivers'),

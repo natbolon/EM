@@ -182,6 +182,15 @@ def home(request):
 
 
 def check_event(event):
+    """
+    Generates the corresponding objects to fill in the event template.
+
+    :param event: String containing the name of the event to be evaluated.
+    :return: 4 objects: obj - dictionary of all Testing instances of the event;
+    run - Form corresponding to the event;
+    stat_obj - dictionary of all instances of the event model;
+    req - block corresponding to the request for the event. In case of Endurance the return is None.
+    """
     if event == "acceleration":
         obj = Testing.objects.filter(event="Acceleration")
         run = AccForm()
@@ -210,6 +219,12 @@ def check_event(event):
 
 
 def event_get(request, event):
+    """
+
+    :param request: GET or POST
+    :param event: String containing tha name of the event
+    :return: dictionary with the necessary objects to fill the Event templates
+    """
     obj, run, stat_obj, req = check_event(event)
     if len(obj) == 0:
         return None
@@ -387,6 +402,15 @@ class EnduranceV(generic.TemplateView):
 
 
 def create_endurance(request, laps, length, data, table):
+    """
+    Function to create an Endurance instance
+    :param request: GET or POST
+    :param laps: Integer determining the number of laps to be done
+    :param length: Float determining the length of one lap
+    :param data: Testing instance with the initial setup to be used
+    :param table: Django Table object
+    :return: render object
+    """
     instance = Endurance()
     instance.length_lap = length
     instance.number_laps = laps
@@ -405,6 +429,13 @@ def create_endurance(request, laps, length, data, table):
 
 
 def create_lap(request, data, table):
+    """
+    Function to create a new lap in the endurance event
+    :param request: GET or POST
+    :param data: Testing instance with the initial setup to be used
+    :param table: Django Table object
+    :return: render object
+    """
     form = LapTimeForm(request.POST)
     lap_instance = form.save(commit=False)
     lap_instance.driver = data.driver
@@ -446,6 +477,11 @@ def create_lap(request, data, table):
 
 
 def statistics(obj):
+    """
+    Compute basic statistics of the corresponding event. Valid for Acceleration and Autocross
+    :param obj: Event instance object
+    :return: list with the average and minimum time and the number of runs.
+    """
     if not obj:
         avg = '-'
         min = '-'
@@ -462,6 +498,11 @@ def statistics(obj):
 
 
 def statistics_sk(obj):
+    """
+    Compute basic statistics of the corresponding event. Valid for Skid Pad
+    :param obj: Event instance object
+    :return: list with the average and minimum time and the number of runs.
+    """
     if not obj:
         return list(('-', '-', 0, '-', '-', '-', '-'))
 
@@ -482,6 +523,12 @@ def statistics_sk(obj):
 
 
 def best_results(request, event):
+    """
+    Function to evaluate the setup corresponding to the best performance on an event
+    :param request: GET or POST
+    :param event: String
+    :return: render object
+    """
     if event == "skidpad":
         stats = statistics_sk(Skid_Pad.objects.all())
         runs = stats[2]

@@ -1,4 +1,4 @@
-{% load render_table from django_tables2 %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,16 +21,17 @@
 </head>
 <body>
 
+<-- Navigation bar and event title! -->
 <div>
     {% include 'blocks/nav.html' %}
     <h1 align="center">{{ data.event }}</h1>
 </div>
 
+{% load render_table from django_tables2 %}
 <form method="post">
     {% csrf_token %}
     <div>
-
-
+        {# Info about the testing session#}
         <div class="container col-sm-3" style="padding-left: 20px; font-size:15px">
 
             <div class="row">
@@ -60,22 +61,24 @@
                 <p></p>
             </div>
 
-
+            {# Request information about the time and lap length (depending on the event) #}
             {% include req %}
 
 
         </div>
 
-
+        {# Request information about the impact on the vehicle #}
         <div id=Results class="container col-sm-6" style="padding: 10px">
             {% include 'blocks/results.html' %}
         </div>
 
+        {# Display information about the statistics of the event #}
         <div class="container col-sm-3" style="font-size: 15px">
             {% include stat_view %}
 
         </div>
 
+        {# Button to submit information #}
         <div class="form-group">
             <div class="col-sm-4">
                 <p></p>
@@ -87,6 +90,7 @@
             </div>
         </div>
 
+        {#  #}
         <div id=Setup class="container col-sm-12" style="padding: 20px">
             {% include 'blocks/setup.html' %}
         </div>
